@@ -1,6 +1,8 @@
-header div {
-	background-color: lightblue;
-	border: 5px;
-	 margin: 5px;
-	 padding: 5px;
+td {
+	background-color: grey;
+	border-width: 5px;
+	border-color: solid black;
+	padding: 2px;
+	height: 20px;
+	width: 20px;
 }
