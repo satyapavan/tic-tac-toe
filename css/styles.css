@@ -1,8 +1,4 @@
-td {
-	background-color: grey;
-	border-width: 5px;
-	border-color: solid black;
-	padding: 2px;
-	height: 20px;
-	width: 20px;
+tr{
+   line-height: line-width;
+   font-size: 24pt;
 }

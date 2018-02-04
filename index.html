@@ -1,8 +1,11 @@
 	<!doctype html>
 
-	<html>
+	<html lang="en">
 
 	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<!-- START - Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111600714-1"></script>
@@ -14,67 +17,81 @@
 		</script>
 		<!-- END   - Global site tag (gtag.js) - Google Analytics -->
 		
-		<!-- START - Below items are for Bootstrap to work -->
-		<script 
-			src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
-			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
-			crossorigin="anonymous">
-		</script>
-		<script 
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
-			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
-			crossorigin="anonymous">
-		</script>
-		<script 
-			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
-			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
-			crossorigin="anonymous">
-		</script>
-		<!-- END   - Below items are for Bootstrap to work -->
 
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> 
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
 		<link rel="stylesheet" href="css/styles.css">
 		<script src="js/script.js"></script>
 	</head>
 
 	<body>
 		<header>
-		<h1 class="navbar">tick...tock...toe...</h1>
-		<ul class="nav nav-pills">
-		  <li class="nav-item">
-		    <a class="nav-link active" href="#">Easy</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link " href="#">Medium</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="#">Hard</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link btn-danger" href="#">Restart</a>
-		  </li>
-		</ul>
-		</header>
-		<div id="game-board" class="container">
-			<table>
-				<tr class="row row-1">
-					<td id="box-11" class="col col-1">X</td>
-					<td id="box-12" class="col col-2">X</td>
-					<td id="box-13" class="col col-3">X</td>
-				</tr>
-				<tr class="row row-2">
-					<td id="box-21" class="col col-1">O</td>
-					<td id="box-22" class="col col-2">O</td>
-					<td id="box-23" class="col col-3">O</td>
-				</tr>
-				<tr class="row row-3">
-					<td id="box-31" class="col col-1">X</td>
-					<td id="box-32" class="col col-2">X</td>
-					<td id="box-33" class="col col-3">X</td>
-				</tr>
-			</table>
-		</div>
-		<footer>
-		</footer>
-	</body>
-	</html>
+			<nav class="navbar navbar-toggleable-md nav-pills navbar-inverse bg-inverse">
+				<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<a class="navbar-brand" href="#">Tic Tac Toe</a>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="#">Easy <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Medium</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Hard</a>
+						</li>
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<button class="btn btn-outline-secondary  my-2 my-sm-0">Restart</button>
+					</form>
+				</div>
+			</nav>
+	</header>
+	<div id="game-board" class="container">
+		<!-- Use table-hover and try to put that commands for cell level -->
+		<table class="table text-center">
+			<tr class="row row-1">
+				<td id="box-11" class="col col-1">X</td>
+				<td id="box-12" class="col col-1">X</td>
+				<td id="box-13" class="col col-1">X</td>
+			</tr>
+			<tr class="row row-2">
+				<td id="box-21" class="col col-1">O</td>
+				<td id="box-22" class="col col-1">O</td>
+				<td id="box-23" class="col col-1">O</td>
+			</tr>
+			<tr class="row row-3">
+				<td id="box-31" class="col col-1">X</td>
+				<td id="box-32" class="col col-1">X</td>
+				<td id="box-33" class="col col-1">X</td>
+			</tr>
+		</table>
+	</div>
+	<footer>
+	</footer>
+
+	<!-- START - Below items are for Bootstrap to work -->
+	<script 
+	src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+	crossorigin="anonymous">
+</script>
+<script 
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
+crossorigin="anonymous">
+</script>
+<script 
+src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+crossorigin="anonymous">
+</script>
+<!-- END   - Below items are for Bootstrap to work -->
+
+</body>
+</html>
