@@ -51,47 +51,60 @@
 					</form>
 				</div>
 			</nav>
-	</header>
-	<div id="game-board" class="container">
-		<!-- Use table-hover and try to put that commands for cell level -->
-		<table class="table text-center">
-			<tr class="row row-1">
-				<td id="box-11" class="col col-1">X</td>
-				<td id="box-12" class="col col-1">X</td>
-				<td id="box-13" class="col col-1">X</td>
-			</tr>
-			<tr class="row row-2">
-				<td id="box-21" class="col col-1">O</td>
-				<td id="box-22" class="col col-1">O</td>
-				<td id="box-23" class="col col-1">O</td>
-			</tr>
-			<tr class="row row-3">
-				<td id="box-31" class="col col-1">X</td>
-				<td id="box-32" class="col col-1">X</td>
-				<td id="box-33" class="col col-1">X</td>
-			</tr>
-		</table>
-	</div>
-	<footer>
-	</footer>
+		</header>
+		<div id="scoreboard" class="container">
+			<table class="table text-center">
+				<tr>
+					<td colspan=2>
+						<span>Score</span>
+					</td>
+				</tr>
+				<tr>
+					<td>X - x</td>
+					<td>O - o</td>
+				</tr>
+			</table>
+		</div>
 
-	<!-- START - Below items are for Bootstrap to work -->
-	<script 
-	src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
-	crossorigin="anonymous">
-</script>
-<script 
-src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
-integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
-crossorigin="anonymous">
-</script>
-<script 
-src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
-integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
-crossorigin="anonymous">
-</script>
-<!-- END   - Below items are for Bootstrap to work -->
+		<div id="gameboard" class="container">
+			<!-- Use table-hover and try to put that commands for cell level -->
+			<table class="table text-center">
+				<tr class="c_row_1">
+					<td id="cell-11" class="c_col_1" role="button" tabindex="0" data-row="1" data-col="1"></td>
+					<td id="cell-12" class="c_col_2" role="button" tabindex="0" data-row="1" data-col="2"></td>
+					<td id="cell-13" class="c_col_3" role="button" tabindex="0" data-row="1" data-col="3"></td>
+				</tr>
+				<tr class="c_row_2">
+					<td id="cell-21" class="c_col_1" role="button" tabindex="0" data-row="2" data-col="1"></td>
+					<td id="cell-22" class="c_col_2" role="button" tabindex="0" data-row="2" data-col="2"></td>
+					<td id="cell-23" class="c_col_3" role="button" tabindex="0" data-row="2" data-col="3"></td>
+				</tr>
+				<tr class="c_row_3">
+					<td id="cell-31" class="c_col_1" role="button" tabindex="0" data-row="3" data-col="1"></td>
+					<td id="cell-32" class="c_col_2" role="button" tabindex="0" data-row="3" data-col="2"></td>
+					<td id="cell-33" class="c_col_3" role="button" tabindex="0" data-row="3" data-col="3"></td>
+				</tr>
+			</table>
+		</div>
+		<footer>
+		</footer>
 
-</body>
+		<!-- START - Below items are for Bootstrap to work -->
+		<script 
+			src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+			crossorigin="anonymous">
+		</script>
+		<script 
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
+			crossorigin="anonymous">
+		</script>
+		<script 
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+			crossorigin="anonymous">
+		</script>
+		<!-- END   - Below items are for Bootstrap to work -->
+	</body>
 </html>
