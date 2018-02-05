@@ -1,4 +1,53 @@
-tr{
-   line-height: line-width;
-   font-size: 24pt;
+#gameboard, #scoreboard {
+	width: 300px;
+}
+
+#gameboard {
+	background-color: #14bdac;
+	padding: 15px;
+}
+
+span {
+	text-align: center;
+}
+
+#scoreboard td {
+	height: 32px;
+	width: 32px;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	padding-right: 24px;
+	padding-left: 24px;
+	border: none;
+}
+
+#gameboard table {
+	margin-bottom: 0px;
+}
+
+#gameboard td {
+   height: 64px;
+   width: 64px;
+}
+
+.table td {
+	border-top-width: 0px;
+	cursor: default;
+}
+.c_row_2 {
+	border-left: 0px;
+	border-right: 0px;
+	border-top: solid 4px;
+	border-bottom: solid 4px;
+	border-color: grey;
+    border-width: 4px;
+}
+
+.c_col_2 {
+	border-left: solid 4px;
+	border-right: solid 4px;
+	border-top: 0px;
+	border-bottom: 0px;
+	border-color: grey;
+    border-width: 4px;
 }
