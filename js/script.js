@@ -130,10 +130,18 @@ function markCell(cell, marker) {
 	NO_OF_MOVES++;
 	console.log(NO_OF_MOVES, BOARD);
 
-	if(marker === "X")
+	if(marker === "X") {
 		document.getElementById(cell.id).innerHTML = svg_x;
-	else
+		// When current marker is 'X', then the next step will be by 'O', hence the below logic
+		document.getElementById("score-x").classList.remove('focus-score-x');
+		document.getElementById("score-o").classList.add('focus-score-o');
+
+	}
+	else {
 		document.getElementById(cell.id).innerHTML = svg_o;
+		document.getElementById("score-o").classList.remove('focus-score-o');
+		document.getElementById("score-x").classList.add('focus-score-x');
+	}
 
 	return true;
 }

@@ -8,6 +8,13 @@
 	width: 300px;
 }
 
+#messageboard {
+	width: 300px;
+	height: 20px;
+	text-align: center;
+	font-size: 13px;
+}
+
 span {
 	text-align: center;
 }
@@ -71,18 +78,28 @@ span {
 
 #score-x {
 	background-color: #F1EDEC;
-	border-color: #14bdac;
-		border-width: 2px;
-		border-right-width: 0px;
-		border-top-width: 0px;
-		box-shadow: 5px 10px blur;
-
+	/*border-width: 0px;*/
 }
 
-#focus-score-x {
-	border-width: 2px;
+.focus-score-x {
+	box-shadow: 0px 1px 1px;
+	border-color: #14bdac;
+	border-right-width: 0px;
+	border-top-width: 0px;
+	border-left-width: 2px;
+	border-bottom-width: 2px;
 }
 
 #score-o {
 	background-color: #F1EDEC;
+	/*border-width: 0px;*/
+}
+
+.focus-score-o {
+	box-shadow: 0px 1px 1px;
+	border-color: #14bdac;
+	border-right-width: 2px;
+	border-top-width: 0px;
+	border-left-width: 0px;
+	border-bottom-width: 2px;
 }
