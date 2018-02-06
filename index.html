@@ -59,42 +59,15 @@
 						<span>Score</span>
 					</td>
 				</tr>
-				<tr>
-					<td>X - x</td>
-					<td>O - o</td>
+				<tr class="btn-group">
+					<td id="score-x" class="btn">X - x</td>
+					<td id="score-o" class="btn">O - o</td>
 				</tr>
 			</table>
 		</div>
 
 		<div id="gameboard" class="container">
-			<!-- Use table-hover and try to put that commands for cell level -->
-			<table class="table text-center">
-				<tr class="c_row_1">
-					<td id="cell-11" class="c_col_1" role="button" tabindex="0" data-row="0" data-col="0">
-<!--
- 						<svg class="crosses" aria-label="X" role="img" viewBox="0 0 128 128" style="visibility: visible; display: none;">
-							<path d="M16,16L112,112" style="stroke: rgb(84, 84, 84); stroke-dasharray: 135.764; stroke-dashoffset: 0;"></path>
-							<path d="M112,16L16,112" style="stroke: rgb(84, 84, 84); stroke-dasharray: 135.764; stroke-dashoffset: 0;"></path>
-						</svg>
-						<svg class="noughts" aria-label="O" role="img" viewBox="0 0 128 128" style="display: none; visibility: visible;">
-							<path d="M64,16A48,48 0 1,0 64,112A48,48 0 1,0 64,16" style="stroke: rgb(242, 235, 211);"></path>
-						</svg>
- -->	
- 					</td>
-					<td id="cell-12" class="c_col_2" role="button" tabindex="0" data-row="0" data-col="1"></td>
-					<td id="cell-13" class="c_col_3" role="button" tabindex="0" data-row="0" data-col="2"></td>
-				</tr>
-				<tr class="c_row_2">
-					<td id="cell-21" class="c_col_1" role="button" tabindex="0" data-row="1" data-col="0"></td>
-					<td id="cell-22" class="c_col_2" role="button" tabindex="0" data-row="1" data-col="1"></td>
-					<td id="cell-23" class="c_col_3" role="button" tabindex="0" data-row="1" data-col="2"></td>
-				</tr>
-				<tr class="c_row_3">
-					<td id="cell-31" class="c_col_1" role="button" tabindex="0" data-row="2" data-col="0"></td>
-					<td id="cell-32" class="c_col_2" role="button" tabindex="0" data-row="2" data-col="1"></td>
-					<td id="cell-33" class="c_col_3" role="button" tabindex="0" data-row="2" data-col="2"></td>
-				</tr>
-			</table>
+			<!-- This code will be injected at runtime from the JS -->
 		</div>
 		<footer>
 		</footer>
