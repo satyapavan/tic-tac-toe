@@ -47,7 +47,7 @@
 						</li>
 					</ul>
 					<form class="form-inline my-2 my-lg-0">
-						<button class="btn btn-outline-secondary  my-2 my-sm-0">Restart</button>
+						<button class="btn btn-outline-secondary  my-2 my-sm-0">Reset</button>
 					</form>
 				</div>
 			</nav>
@@ -63,16 +63,25 @@
 					<td id="score-x" class="btn focus-score-x">X - x</td>
 					<td id="score-o" class="btn focus-score-o">O - o</td>
 				</tr>
+				<tr>
+					<td id="messageboard" colspan=2>
+						<!-- This code will be injected at runtime from the JS -->
+					</td>
+				</tr>
 			</table>
-		</div>
-
-		<div id="messageboard" class="container">
-			<!-- This will be added by the JS later in the flow -->
 		</div>
 
 		<div id="gameboard" class="container">
 			<!-- This code will be injected at runtime from the JS -->
 		</div>
+	 	
+		<div class="container text-center">
+			<div id="restartgame" class="btn" role="button">
+				Restart Game
+			</div>		
+		</div>
+	
+
 		<footer>
 		</footer>
 

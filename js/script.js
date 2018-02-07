@@ -39,6 +39,10 @@ function isGameOver(marker) {
 		return false;
 	}
 
+	if(NO_OF_MOVES == 9) {
+		console.log("All the steps are exhausted, its a TIE");
+		return	true;
+	}
 	do {
 		// check for row success
 		for(var itr = 0; itr < 3; ++itr) {
@@ -135,12 +139,15 @@ function markCell(cell, marker) {
 		// When current marker is 'X', then the next step will be by 'O', hence the below logic
 		document.getElementById("score-x").classList.remove('focus-score-x');
 		document.getElementById("score-o").classList.add('focus-score-o');
+		document.getElementById("messageboard").innerHTML = "<br>O's turn";
 
 	}
 	else {
 		document.getElementById(cell.id).innerHTML = svg_o;
 		document.getElementById("score-o").classList.remove('focus-score-o');
 		document.getElementById("score-x").classList.add('focus-score-x');
+		document.getElementById("messageboard").innerHTML = "<br>X's turn";
+
 	}
 
 	return true;
@@ -148,6 +155,11 @@ function markCell(cell, marker) {
 
 function initializeBoard() {
 	console.log("Entered into initializeBoard");
+	BOARD = [
+	["", "", ""],
+	["", "", ""],
+	["", "", ""]
+];
 }
 
 function drawBoard() {
@@ -171,6 +183,7 @@ function drawBoard() {
 			</table>';
 
 	document.getElementById("gameboard").innerHTML = gameboard_code ;
+	document.getElementById("messageboard").innerHTML = "<span><br>Hey there!! Pick a block.</span>";
 }
 
 function activateBoard() {
@@ -182,6 +195,8 @@ function activateBoard() {
 			document.getElementById("cell-"+row+col).addEventListener("click", playerMove, false);
 		}
 	}
+
+	document.getElementById("restartgame").addEventListener("click", startGame, false);
 }
 
 function startGame() {

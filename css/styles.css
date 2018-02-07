@@ -8,11 +8,22 @@
 	width: 300px;
 }
 
-#messageboard {
+#restartgame {
+	background-color: #F1EDEC;
 	width: 300px;
-	height: 20px;
-	text-align: center;
-	font-size: 13px;
+	color: grey;
+	font-size: .85rem;
+	margin-top: 10px;
+}
+
+#restartgame:hover {
+	color: #14bdac;
+	font-weight: bold;
+}
+
+#restartgame:active {
+	/*This creates a nice stretch effect*/
+	font-size: 1.2rem;
 }
 
 span {
