@@ -39,10 +39,6 @@ function isGameOver(marker) {
 		return false;
 	}
 
-	if(NO_OF_MOVES == 9) {
-		console.log("All the steps are exhausted, its a TIE");
-		return	true;
-	}
 	do {
 		// check for row success
 		for(var itr = 0; itr < 3; ++itr) {
@@ -89,12 +85,28 @@ function isGameOver(marker) {
 
 	if(game_status) {
 		console.log("WINNER OF THE GAME IS " + marker);
+		document.getElementById("messageboard").innerHTML = "<br> '" + marker + "' WON!";
+		return game_status;
+	} else if(NO_OF_MOVES == 9) {
+		console.log("All the steps are exhausted, its a TIE");
+		document.getElementById("messageboard").innerHTML = "<br>It's a TIE!!";
+		return	true;
 	}
+}
 
-	return game_status;
+function makeEaseMove() {
+	console.log("Entering into makeEaseMove");
+
+	do {
+			var temp = Math.round( Math.random() * 10 ) % 9 ;
+			break;
+		}
+	} while(1);
 }
 
 function computerMove() {
+	console.log("Entering into computerMove");
+	makeEaseMove();
 	isGameOver();
 }
 
