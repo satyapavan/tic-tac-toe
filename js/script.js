@@ -100,7 +100,7 @@ function makeEaseMove() {
 	do {
 			var temp = Math.round( Math.random() * 10 ) % 9 ;
 			break;
-		}
+	
 	} while(1);
 }
 
