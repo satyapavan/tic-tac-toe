@@ -66,8 +66,15 @@ span {
 }
 
 .table td {
+	/*
+		This is for overriding the default styles of bootstrap where its showing a default top line 
+		which i do not need in this case.
+	*/
 	border-top-width: 0px;
+	/*This is for removing the "hand" icon that we get for a button.*/
 	cursor: default;
+	/*This is for removing the active/cursor box highlighter when a cell is clicked. it looked yuck*/
+	outline: none;
 }
 .c_row_2 {
 	border-left: 0px;
