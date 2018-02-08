@@ -1,50 +1,28 @@
-SYMBOLS = {
-  player:'X',
-  computer:'O'
-};
-
-var NO_OF_MOVES = 0;
-var WINNING_LINE;
-
-const RESULT = {
-  incomplete: 0,
-  playerXWon: SYMBOLS.player,
-  playerOWon: SYMBOLS.computer,
-  tie: 3
-};
-
-BOARD = [
-	["", "", ""],
-	["", "", ""],
-	["", "", ""]
-];
-
-const svg_x = '<svg class="crosses" aria-label="X" role="img" viewBox="0 0 128 128" ><path d="M16,16L112,112" style="stroke: rgb(84, 84, 84); stroke-dasharray: 135.764; stroke-dashoffset: 0;"></path><path d="M112,16L16,112" style="stroke: rgb(84, 84, 84); stroke-dasharray: 135.764; stroke-dashoffset: 0;"></path></svg>';
-const svg_o = '<svg class="noughts" aria-label="O" role="img" viewBox="0 0 128 128" ><path d="M64,16A48,48 0 1,0 64,112A48,48 0 1,0 64,16" style="stroke: rgb(242, 235, 211);"></path></svg>';
+var GAME_STATE;
 
 function drawGameOver() {
 	console.log("Entered into drawGameOver");
 
 }
 
-function isGameOver(marker) {
+function isGameOver(parGameState) {
 	console.log("Entered into isGameOver");
 	
+	var line;
 	var game_status = false;
 
-	var line;
-
-	if(NO_OF_MOVES <= 5){
+	if(parGameState.NO_OF_MOVES <= 5){
 		console.log("Too few moves, game cannot be over yet");
+		parGameState.GAME_STATUS = parGameState.RESULTS.incomplete ; 
 		return false;
 	}
 
 	do {
 		// check for row success
 		for(var itr = 0; itr < 3; ++itr) {
-			line = BOARD[itr].join('');
+			line = parGameState.BOARD[itr].join('');
 
-			if(line === marker.repeat(3)) {
+			if(line === parGameState.TURN.repeat(3)) {
 				game_status = true;
 				break;
 			}
@@ -52,10 +30,10 @@ function isGameOver(marker) {
 
 		// check for col success
 		for (var itr = 0; itr < 3; ++itr) {
-			line = [BOARD[0][itr], BOARD[1][itr], BOARD[2][itr]];
+			line = [parGameState.BOARD[0][itr], parGameState.BOARD[1][itr], parGameState.BOARD[2][itr]];
 			line = line.join('');
 
-			if(line === marker.repeat(3)) {
+			if(line === parGameState.TURN.repeat(3)) {
 				game_status = true;
 				break;
 			}	
@@ -63,20 +41,20 @@ function isGameOver(marker) {
 
 		// now check for diagonal success
 
-		line = [BOARD[0][0], BOARD[1][1], BOARD[2][2]];
+		line = [parGameState.BOARD[0][0], parGameState.BOARD[1][1], parGameState.BOARD[2][2]];
 		line = line.join('');
 
-		if(line === marker.repeat(3)) {
+		if(line === parGameState.TURN.repeat(3)) {
 			game_status = true;
 			break;
 		}
 
 		// now the other diagoal check
 
-		line = [BOARD[0][2], BOARD[1][1], BOARD[2][0]];
+		line = [parGameState.BOARD[0][2], parGameState.BOARD[1][1], parGameState.BOARD[2][0]];
 		line = line.join('');
 
-		if(line === marker.repeat(3)) {
+		if(line === parGameState.TURN.repeat(3)) {
 			game_status = true;
 			break;
 		}
@@ -84,24 +62,31 @@ function isGameOver(marker) {
 	} while(0);
 
 	if(game_status) {
-		console.log("WINNER OF THE GAME IS " + marker);
-		document.getElementById("messageboard").innerHTML = "<br> '" + marker + "' WON!";
-		return game_status;
-	} else if(NO_OF_MOVES == 9) {
+		console.log("WINNER OF THE GAME IS " + parGameState.TURN);
+
+		parGameState.WINNING_LINE = line;
+
+		if(parGameState.TURN === parGameState.SYMBOL.human ) {
+			parGameState.GAME_RESULT = parGameState.RESULTS.playerXWon ;
+		} else {
+			parGameState.GAME_RESULT = parGameState.RESULTS.playerOWon ;
+		}
+
+	} else if(parGameState.NO_OF_MOVES == 9) {
 		console.log("All the steps are exhausted, its a TIE");
-		document.getElementById("messageboard").innerHTML = "<br>It's a TIE!!";
-		return	true;
+		parGameState.GAME_RESULT = parGameState.RESULTS.tie;
+		game_status = true;
 	}
+
+	return game_status;
 }
 
-function makeEaseMove() {
-	console.log("Entering into makeEaseMove");
+function transitionTurn(parGameState) {
+	console.log("Entering into transitionTurn");
+	console.log(parGameState);
+	parGameState.TURN = parGameState.TURN === parGameState.SYMBOL.human ? parGameState.SYMBOL.robot : parGameState.SYMBOL.human;
 
-	do {
-			var temp = Math.round( Math.random() * 10 ) % 9 ;
-			break;
-	
-	} while(1);
+	console.log(parGameState);
 }
 
 function computerMove() {
@@ -113,89 +98,53 @@ function computerMove() {
 function playerMove() {
 	console.log("Entering into playerMove");
 
-	if( isCellMarked(this)) {
+	if( isCellMarked(this.getAttribute("data-row"), this.getAttribute("data-col"), GAME_STATE)) {
 		console.log("As the cell is already marked, do not do anything");
 		return true;
 	}
 
-	if( Math.round(Math.random()) == 0 ) {
-		markCell(this, SYMBOLS.computer);
-		isGameOver(SYMBOLS.computer);
-	}
-	else {
-		markCell(this, SYMBOLS.player); 
-		isGameOver(SYMBOLS.player);
-	}
+	markCell(this.getAttribute("data-row"), this.getAttribute("data-col"), GAME_STATE); 
 
-	// isGameOver(SYMBOLS.computer);
+	// first draw the X/O as per the turn
+	UI.drawSVG(this, GAME_STATE);
+	// then check if the game is over
+	if(!isGameOver(GAME_STATE)) {
+		// if not, then retransition to the next step/view
+		transitionTurn(GAME_STATE);
+	}
+	// when you feel eerything is over, then update the screen
+	UI.updateScreen(GAME_STATE);
 }
 
-function isCellMarked(cell) {
-	var status = BOARD[cell.getAttribute("data-row")][cell.getAttribute("data-col")] != "";
+function isCellMarked(row, col, parGameState) {
+	var status = parGameState.BOARD[row][col] !== "";
 	console.log("isCellMarked[" + status + "]");
 	return status;
 }
 
-function markCell(cell, marker) {
-	if(isCellMarked(cell)) {
+function markCell(row, col, parGameState) {
+	if(isCellMarked(row, col, parGameState)) {
 		console.log("Cell is already marked");
 		return false;
 	}
 
-	BOARD[cell.getAttribute("data-row")][cell.getAttribute("data-col")] = marker;
-	NO_OF_MOVES++;
-	console.log(NO_OF_MOVES, BOARD);
+	parGameState.BOARD[row][col] = parGameState.TURN ;
 
-	if(marker === "X") {
-		document.getElementById(cell.id).innerHTML = svg_x;
-		// When current marker is 'X', then the next step will be by 'O', hence the below logic
-		document.getElementById("score-x").classList.remove('focus-score-x');
-		document.getElementById("score-o").classList.add('focus-score-o');
-		document.getElementById("messageboard").innerHTML = "<br>O's turn";
+	// BOARD[cell.getAttribute("data-row")][cell.getAttribute("data-col")] = marker;
+	parGameState.NO_OF_MOVES++;
 
-	}
-	else {
-		document.getElementById(cell.id).innerHTML = svg_o;
-		document.getElementById("score-o").classList.remove('focus-score-o');
-		document.getElementById("score-x").classList.add('focus-score-x');
-		document.getElementById("messageboard").innerHTML = "<br>X's turn";
+	if(parGameState.TURN === parGameState.SYMBOL.robot)
+		parGameState.O_MOVES_COUNT++ ;  // This is used for score calculation
 
-	}
+	console.log(parGameState);
 
 	return true;
 }
 
 function initializeBoard() {
 	console.log("Entered into initializeBoard");
-	BOARD = [
-	["", "", ""],
-	["", "", ""],
-	["", "", ""]
-];
-}
-
-function drawBoard() {
-	console.log("Entered into drawBoard");
-	var gameboard_code = '<table class="table text-center">\
-				<tr class="c_row_1">\
-					<td id="cell-11" class="c_col_1" role="button" tabindex="0" data-row="0" data-col="0"></td>\
-					<td id="cell-12" class="c_col_2" role="button" tabindex="0" data-row="0" data-col="1"></td>\
-					<td id="cell-13" class="c_col_3" role="button" tabindex="0" data-row="0" data-col="2"></td>\
-				</tr>\
-				<tr class="c_row_2">\
-					<td id="cell-21" class="c_col_1" role="button" tabindex="0" data-row="1" data-col="0"></td>\
-					<td id="cell-22" class="c_col_2" role="button" tabindex="0" data-row="1" data-col="1"></td>\
-					<td id="cell-23" class="c_col_3" role="button" tabindex="0" data-row="1" data-col="2"></td>\
-				</tr>\
-				<tr class="c_row_3">\
-					<td id="cell-31" class="c_col_1" role="button" tabindex="0" data-row="2" data-col="0"></td>\
-					<td id="cell-32" class="c_col_2" role="button" tabindex="0" data-row="2" data-col="1"></td>\
-					<td id="cell-33" class="c_col_3" role="button" tabindex="0" data-row="2" data-col="2"></td>\
-				</tr>\
-			</table>';
-
-	document.getElementById("gameboard").innerHTML = gameboard_code ;
-	document.getElementById("messageboard").innerHTML = "<span><br>Hey there!! Pick a block.</span>";
+	 GAME_STATE = new cGameState("pass_the_level_later");
+	 console.log(GAME_STATE);
 }
 
 function activateBoard() {
@@ -214,7 +163,7 @@ function activateBoard() {
 function startGame() {
 	console.log("Entered into startGame");
 	initializeBoard();
-	drawBoard();
+	UI.drawBoard();
 	activateBoard();
 }
 
