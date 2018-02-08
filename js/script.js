@@ -11,7 +11,7 @@ function isGameOver(parGameState) {
 	var line;
 	var game_status = false;
 
-	if(parGameState.NO_OF_MOVES <= 5){
+	if(parGameState.TOTAL_MOVES <= 5){
 		console.log("Too few moves, game cannot be over yet");
 		parGameState.GAME_STATUS = parGameState.RESULTS.incomplete ; 
 		return false;
@@ -72,7 +72,7 @@ function isGameOver(parGameState) {
 			parGameState.GAME_RESULT = parGameState.RESULTS.playerOWon ;
 		}
 
-	} else if(parGameState.NO_OF_MOVES == 9) {
+	} else if(parGameState.TOTAL_MOVES == 9) {
 		console.log("All the steps are exhausted, its a TIE");
 		parGameState.GAME_RESULT = parGameState.RESULTS.tie;
 		game_status = true;
@@ -131,7 +131,7 @@ function markCell(row, col, parGameState) {
 	parGameState.BOARD[row][col] = parGameState.TURN ;
 
 	// BOARD[cell.getAttribute("data-row")][cell.getAttribute("data-col")] = marker;
-	parGameState.NO_OF_MOVES++;
+	parGameState.TOTAL_MOVES++;
 
 	if(parGameState.TURN === parGameState.SYMBOL.robot)
 		parGameState.O_MOVES_COUNT++ ;  // This is used for score calculation

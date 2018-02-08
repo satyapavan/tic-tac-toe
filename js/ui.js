@@ -6,6 +6,13 @@
 const svg_x = '<svg class="crosses" aria-label="X" role="img" viewBox="0 0 128 128" ><path d="M16,16L112,112" style="stroke: rgb(84, 84, 84); stroke-dasharray: 135.764; stroke-dashoffset: 0;"></path><path d="M112,16L16,112" style="stroke: rgb(84, 84, 84); stroke-dasharray: 135.764; stroke-dashoffset: 0;"></path></svg>';
 const svg_o = '<svg class="noughts" aria-label="O" role="img" viewBox="0 0 128 128" ><path d="M64,16A48,48 0 1,0 64,112A48,48 0 1,0 64,16" style="stroke: rgb(242, 235, 211);"></path></svg>';
 
+const svg_o_won = '<svg class="noughts" aria-label="O" role="img" viewBox="0 0 128 128" style="width: 128px; height: 128px;"><path d="M64,16A48,48 0 1,0 64,112A48,48 0 1,0 64,16" style="stroke: rgb(242, 235, 211);"></path></svg>';
+
+const svg_x_won = '<svg class="crosses" aria-label="X" role="img" viewBox="0 0 128 128" style="width: 128px; height: 128px;"><path d="M16,16L112,112" style="stroke: rgb(84, 84, 84);"></path><path d="M112,16L16,112" style="stroke: rgb(84, 84, 84);"></path></svg>';
+
+const svg_tie = '<svg class="crosses" aria-label="X" role="img" viewBox="0 0 128 128" style="width: 96px; height: 96px;"><path d="M16,16L112,112" style="stroke: rgb(84, 84, 84);"></path><path d="M112,16L16,112" style="stroke: rgb(84, 84, 84);"></path></svg>\
+	<svg class="noughts" aria-label="O" role="img" viewBox="0 0 128 128" style="width: 96px; height: 96px;"><path d="M64,16A48,48 0 1,0 64,112A48,48 0 1,0 64,16" style="stroke: rgb(242, 235, 211);"></path></svg>';
+
 var UI = {};
 
 UI.drawBoard = function() {
@@ -64,16 +71,20 @@ UI.updateScreen = function(parGameState) {
 		///////////////////////////////////////////////////////////
 		case parGameState.RESULTS.playerXWon :
 			document.getElementById("messageboard").innerHTML = "<br> '" + parGameState.SYMBOL.human + "' WON!";
+			// document.getElementById("game_table").innerHTML = svg_x_won;
+
 		break;
 
 		///////////////////////////////////////////////////////////
 		case parGameState.RESULTS.playerOWon :
 			document.getElementById("messageboard").innerHTML = "<br> '" + parGameState.SYMBOL.robot + "' WON!";
+			// document.getElementById("game_table").innerHTML = svg_o_won;
 		break;
 
 		///////////////////////////////////////////////////////////
 		case parGameState.RESULTS.tie :
 			document.getElementById("messageboard").innerHTML = "<br>It's a TIE!!";
+			// document.getElementById("game_table").innerHTML = svg_tie;
 		break;
 
 		///////////////////////////////////////////////////////////
