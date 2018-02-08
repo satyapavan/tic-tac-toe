@@ -16,6 +16,7 @@
 	margin-top: 10px;
 }
 
+/*this is creating a new blown-up animation*/
 #restartgame:hover {
 	color: #14bdac;
 	font-weight: bold;
@@ -30,6 +31,7 @@ span {
 	text-align: center;
 }
 
+/*this is for drawing the 'X' of svg class*/
 .crosses {
 	stroke: rgb(84, 84, 84);
     stroke-dasharray: 135.764;
@@ -38,6 +40,7 @@ span {
 	stroke-width: 8px;
 }
 
+/*this is for drawing the 'O' of svg class*/
 .noughts {
 	stroke: rgb(242, 235, 211);
     stroke-dasharray: 301.635;
@@ -74,6 +77,7 @@ span {
 	/*This is for removing the "hand" icon that we get for a button.*/
 	cursor: default;
 	/*This is for removing the active/cursor box highlighter when a cell is clicked. it looked yuck*/
+	/*please visit http://www.outlinenone.com/ */
 	outline: none;
 }
 .c_row_2 {
