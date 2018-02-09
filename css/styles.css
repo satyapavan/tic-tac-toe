@@ -34,8 +34,6 @@ span {
 /*this is for drawing the 'X' of svg class*/
 .crosses {
 	stroke: rgb(84, 84, 84);
-    stroke-dasharray: 135.764;
-    stroke-dashoffset: 0;
 	fill: none;
 	stroke-width: 8px;
 }
@@ -43,10 +41,44 @@ span {
 /*this is for drawing the 'O' of svg class*/
 .noughts {
 	stroke: rgb(242, 235, 211);
-    stroke-dasharray: 301.635;
-    stroke-dashoffset: 0;
 	fill: none;
 	stroke-width: 8px;
+}
+
+/* The animation code */
+@keyframes animate-svg {
+	to {
+    stroke-dashoffset: 0;
+  }
+   /* 0%   {opacity: 0  ; width: 0%  ; height: 0%;   }
+    25%  {opacity: .25; width: 25% ; height: 25%;  }
+    50%  {opacity: .50; width: 50% ; height: 50%;  }
+    75%  {opacity: .75; width: 75% ; height: 75%;  }
+    100% {opacity: 1  ; width: 100%; height: 1000%;}*/
+}
+
+path {
+	stroke-dasharray: 1000;
+  	stroke-dashoffset: 1000;
+  	animation: animate-svg 2s linear forwards;
+    /*animation-name: animate-svg;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-delay: 2s;
+    animation-iteration-count: 2;
+    animation-direction: alternate;*/
+}
+
+path:nth-of-type(2n) {
+	stroke-dasharray: 1000;
+  	stroke-dashoffset: 1000;
+  	animation: animate-svg 2s linear .3s forwards;
+    /*animation-name: animate-svg;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-delay: 2s;
+    animation-iteration-count: 2;
+    animation-direction: alternate;*/
 }
 
 #scoreboard td {
@@ -125,3 +157,4 @@ span {
 	border-left-width: 0px;
 	border-bottom-width: 2px;
 }
+
