@@ -11,7 +11,7 @@ function isGameOver(parGameState) {
 	var line;
 	var game_status = false;
 
-	if(parGameState.TOTAL_MOVES <= 5){
+	if(parGameState.TOTAL_MOVES < 5){
 		console.log("Too few moves, game cannot be over yet");
 		parGameState.GAME_STATUS = parGameState.RESULTS.incomplete ; 
 		return false;
