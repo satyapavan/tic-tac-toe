@@ -13,6 +13,7 @@ var UI = {};
 
 UI.drawBoard = function() {
 	console.log("Entering into drawBoard");
+
 	var gameboard_code = '\
 			<div id="x-won" class="container">' + svg_x + '<span>WINNER</span></div>\
 			<div id="o-won" class="container">' + svg_o + '<span>WINNER</span></div>\
@@ -48,6 +49,28 @@ UI.drawSVG = function(cell, parGameState) {
 	}
 }
 
+UI.animateGameOverCells = function(parGameState) {
+	console.log("Entering into animateGameOverCells");
+
+	var pos = parGameState.WINNING_LINE;
+
+	// this is too bad logic, n^3
+	for (var row = 0; row < 3; row++) {
+		console.log("	row=" + row);
+		for (var col = 0; col < 3; col++) {
+			console.log("		col=" + col);
+			if( ( row === pos[0][0] && col === pos[0][1] ) 
+				|| ( row === pos[1][0] && col === pos[1][1] ) 
+				|| ( row === pos[2][0] && col === pos[2][1] ) ) {
+				console.log("		pos=[" + row + "][" + col + "]");
+				continue;
+			}
+			console.log("		adding class for cell-"+(row+1)+(col+1));
+			document.getElementById("cell-"+(row+1)+(col+1)).classList.add('lost-cells-gameover');
+		}
+	}
+}
+
 UI.updateScreen = function(parGameState) {
 	console.log("Entering into paintScreen");
 
@@ -74,8 +97,13 @@ UI.updateScreen = function(parGameState) {
 			document.getElementById("score-o").classList.add('focus-score-o');
 			document.getElementById("score-x").classList.add('focus-score-x');
 
-			var div = document.getElementById("x-won");
-			div.style.display = "block"; 
+			UI.animateGameOverCells(parGameState);
+
+			setTimeout(function(){
+				var div = document.getElementById("x-won");
+				div.style.display = "block"; 
+			}, 4000);
+
 		break;
 
 		///////////////////////////////////////////////////////////
@@ -83,9 +111,14 @@ UI.updateScreen = function(parGameState) {
 			document.getElementById("messageboard").innerHTML = "<br> Gameover";
 			document.getElementById("score-o").classList.add('focus-score-o');
 			document.getElementById("score-x").classList.add('focus-score-x');
-			
-			var div = document.getElementById("o-won");
-			div.style.display = "block"; 
+
+			UI.animateGameOverCells(parGameState);
+
+			setTimeout(function(){
+				var div = document.getElementById("o-won");
+				div.style.display = "block"; 
+			}, 4000);
+
 		break;
 
 		///////////////////////////////////////////////////////////
@@ -94,8 +127,13 @@ UI.updateScreen = function(parGameState) {
 			document.getElementById("score-o").classList.add('focus-score-o');
 			document.getElementById("score-x").classList.add('focus-score-x');
 
-			var div = document.getElementById("tie");
-			div.style.display = "block";
+			UI.animateGameOverCells(parGameState);
+
+			setTimeout(function(){
+				var div = document.getElementById("tie");
+				div.style.display = "block"; 
+			}, 4000);
+
 		break;
 
 		///////////////////////////////////////////////////////////

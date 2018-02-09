@@ -4,6 +4,7 @@ function isGameOver(parGameState) {
 	console.log("Entered into isGameOver");
 	
 	var line;
+	var pos;
 	var game_status = false;
 
 	// make sure there is no <= there, elese the gameover is not coming after 5 moves. yuck!
@@ -19,6 +20,7 @@ function isGameOver(parGameState) {
 			line = parGameState.BOARD[itr].join('');
 
 			if(line === parGameState.TURN.repeat(3)) {
+				pos = [ [itr, 0], [itr, 1], [itr, 2] ];
 				game_status = true;
 				break;
 			}
@@ -30,6 +32,7 @@ function isGameOver(parGameState) {
 			line = line.join('');
 
 			if(line === parGameState.TURN.repeat(3)) {
+				pos = [ [0, itr], [1, itr], [2, itr] ];
 				game_status = true;
 				break;
 			}	
@@ -41,6 +44,7 @@ function isGameOver(parGameState) {
 		line = line.join('');
 
 		if(line === parGameState.TURN.repeat(3)) {
+			pos = [ [0, 0], [1, 1], [2, 2] ];
 			game_status = true;
 			break;
 		}
@@ -51,6 +55,7 @@ function isGameOver(parGameState) {
 		line = line.join('');
 
 		if(line === parGameState.TURN.repeat(3)) {
+			pos = [ [0, 2], [1, 1], [2, 0] ];
 			game_status = true;
 			break;
 		}
@@ -60,7 +65,7 @@ function isGameOver(parGameState) {
 	if(game_status) {
 		console.log("WINNER OF THE GAME IS " + parGameState.TURN);
 
-		parGameState.WINNING_LINE = line;
+		parGameState.WINNING_LINE = pos;
 
 		if(parGameState.TURN === parGameState.SYMBOL.human ) {
 			parGameState.GAME_RESULT = parGameState.RESULTS.playerXWon ;

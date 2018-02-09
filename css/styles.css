@@ -82,17 +82,17 @@ path:nth-of-type(2n) {
 
 /* get the fade feeling for svg when the cells are in the non-winning zone */
 @keyframes svg-fade-ani {
-    0%   {opacity: 1  ; }
-    25%  {opacity: .75; }
-    50%  {opacity: .50; }
-    75%  {opacity: .25; }
-    100% {opacity: 0  ; }
+    0%   {opacity: 1  ; transform: scale(1);}
+    25%  {opacity: .75; transform: scale(.7);}
+    50%  {opacity: .50; transform: scale(.5);}
+    75%  {opacity: .25; transform: scale(.3);}
+    100% {opacity: 0  ; transform: scale(0);}
 }
 
 .lost-cells-gameover {
-	stroke-dasharray: 1000;
+	stroke-dasharray: 100;
   	stroke-dashoffset: 0;
-  	animation: svg-fade-ani 1.5s linear 2s 2 alternate forwards;
+  	animation: svg-fade-ani 2.5s linear 1.5s forwards;
  /*   animation-name: svg-fade-ani;
     animation-duration: 1.5s;
     animation-timing-function: linear;
@@ -206,16 +206,16 @@ path:nth-of-type(2n) {
 }
 
 @keyframes rotater {
-	0%   { transform: scale(0) }
-	20%  { transform: scale(.20) }
-	30%  { transform: scale(.30) }
-	40%  { transform: scale(.40) }
-	50%  { transform: scale(.50) }
-	60%  { transform: scale(.60) }
-	70%  { transform: scale(.70) }
-	80%  { transform: scale(.80) }
-	90%  { transform: scale(.90) }
-	100% { transform: scale(1) }
+	0%   { transform: scale(0)   ; opacity: 0;  }
+	20%  { transform: scale(.20) ; opacity: .2; }
+	30%  { transform: scale(.30) ; opacity: .3; }
+	40%  { transform: scale(.40) ; opacity: .4; }
+	50%  { transform: scale(.50) ; opacity: .5; }
+	60%  { transform: scale(.60) ; opacity: .6; }
+	70%  { transform: scale(.70) ; opacity: .7; }
+	80%  { transform: scale(.80) ; opacity: .8; }
+	90%  { transform: scale(.90) ; opacity: .9; }
+	100% { transform: scale(1)   ;  opacity: 1; }
 /*
 	0% { transform:rotate(0) scale(1) }
 	50% { transform:rotate(360deg) scale(2) }
