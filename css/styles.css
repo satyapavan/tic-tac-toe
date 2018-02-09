@@ -45,22 +45,17 @@ span {
 	stroke-width: 8px;
 }
 
-/* The animation code */
-@keyframes animate-svg {
+/* get the writing feeling for svg */
+@keyframes svg-write-ani {
 	to {
     stroke-dashoffset: 0;
   }
-   /* 0%   {opacity: 0  ; width: 0%  ; height: 0%;   }
-    25%  {opacity: .25; width: 25% ; height: 25%;  }
-    50%  {opacity: .50; width: 50% ; height: 50%;  }
-    75%  {opacity: .75; width: 75% ; height: 75%;  }
-    100% {opacity: 1  ; width: 100%; height: 1000%;}*/
 }
 
 path {
 	stroke-dasharray: 1000;
   	stroke-dashoffset: 1000;
-  	animation: animate-svg 1.5s linear forwards;
+  	animation: svg-write-ani 1.5s linear forwards;
     /*animation-name: animate-svg;
     animation-duration: 1.5s;
     animation-timing-function: linear;
@@ -69,18 +64,68 @@ path {
     animation-direction: alternate;*/
 }
 
-/*this is to make sure the '/' part of 'X' doesn't start the same time as '\'
-doing this gives a nice 'writing' feeling*/
+/*
+    this is to make sure the '/' part of 'X' doesn't start the same time as '\'
+    doing this gives a nice 'writing' feeling
+*/
 path:nth-of-type(2n) {
 	stroke-dasharray: 1000;
   	stroke-dashoffset: 1000;
-  	animation: animate-svg 1.5s linear .3s forwards;
+  	animation: svg-write-ani 1.5s linear .3s forwards;
     /*animation-name: animate-svg;
     animation-duration: 1.5s;
     animation-timing-function: linear;
     animation-delay: 2s;
     animation-iteration-count: 2;
     animation-direction: alternate;*/
+}
+
+/* get the fade feeling for svg when the cells are in the non-winning zone */
+@keyframes svg-fade-ani {
+    0%   {opacity: 1  ; }
+    25%  {opacity: .75; }
+    50%  {opacity: .50; }
+    75%  {opacity: .25; }
+    100% {opacity: 0  ; }
+}
+
+.lost-cells-gameover {
+	stroke-dasharray: 1000;
+  	stroke-dashoffset: 0;
+  	animation: svg-fade-ani 1.5s linear 2s 2 alternate forwards;
+ /*   animation-name: svg-fade-ani;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+
+    this is needed as we need to give time for the cells to be written before we fade them
+	or else the winning cell writing will be overlapped with the winning animation
+
+    animation-delay: 2s;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;*/
+}
+
+/*get the zigzag moving combo for the winning cells*/
+@keyframes svg-zigzag-ani {
+  to {
+    stroke-dashoffset: 1000;
+  }
+}
+
+.win-cells-gameover {
+	stroke-dasharray: 100;
+  	stroke-dashoffset: 0;
+    animation-name: svg-zigzag-ani;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+ /*
+    this is needed as we need to give time for the cells to be written before we fade them
+	or else the winning cell writing will be overlapped with the winning animation
+*/
+    animation-delay: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #scoreboard td {
@@ -160,3 +205,56 @@ path:nth-of-type(2n) {
 	border-bottom-width: 2px;
 }
 
+@keyframes rotater {
+	0%   { transform: scale(0) }
+	20%  { transform: scale(.20) }
+	30%  { transform: scale(.30) }
+	40%  { transform: scale(.40) }
+	50%  { transform: scale(.50) }
+	60%  { transform: scale(.60) }
+	70%  { transform: scale(.70) }
+	80%  { transform: scale(.80) }
+	90%  { transform: scale(.90) }
+	100% { transform: scale(1) }
+/*
+	0% { transform:rotate(0) scale(1) }
+	50% { transform:rotate(360deg) scale(2) }
+	100% { transform:rotate(720deg) scale(1) }*/
+}
+
+#x-won, #o-won, #tie {
+	display: none;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 280px;
+	height: 300px;
+	background-color: #14bdac;
+	text-align: justify;
+	vertical-align: middle;
+	font-size: 250%;
+	font-weight: bold;
+	color: #545454;
+
+
+	animation-name:rotater; 
+	animation-duration:1s; 
+	animation-iteration-count:1; 
+	animation-timing-function: linear;
+}
+
+/*
+    because of 2 svg's this is not taking up well.
+	i should have used relative positioning, but just too tired right now.
+*/
+#tie {
+	padding-top: 70px;
+	padding-left: 40px;
+	padding-right: 20px;
+}
+
+#gameboard span {
+	position: absolute;
+	left: 65px;
+	top: 220px;
+}
