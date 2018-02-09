@@ -1,16 +1,12 @@
 var GAME_STATE;
 
-function drawGameOver() {
-	console.log("Entered into drawGameOver");
-
-}
-
 function isGameOver(parGameState) {
 	console.log("Entered into isGameOver");
 	
 	var line;
 	var game_status = false;
 
+	// make sure there is no <= there, elese the gameover is not coming after 5 moves. yuck!
 	if(parGameState.TOTAL_MOVES < 5){
 		console.log("Too few moves, game cannot be over yet");
 		parGameState.GAME_STATUS = parGameState.RESULTS.incomplete ; 
@@ -143,7 +139,20 @@ function markCell(row, col, parGameState) {
 
 function initializeBoard() {
 	console.log("Entered into initializeBoard");
-	 GAME_STATE = new cGameState("pass_the_level_later");
+	var level;
+	 GAME_STATE = new cGameState(level);
+
+	$("#navbarSupportedContent a").on("click", function(){
+		console.log("Entering to access the difficulty level");
+
+   		$("#navbarSupportedContent").find(".active").removeClass("active");
+   		$(this).parent().addClass("active");
+   		level = $(this).text();
+
+   		console.log(this);
+   		console.log("level = " + level);
+	});
+
 	 console.log(GAME_STATE);
 }
 
