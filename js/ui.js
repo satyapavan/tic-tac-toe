@@ -102,6 +102,7 @@ UI.updateScreen = function(parGameState) {
 			setTimeout(function(){
 				var div = document.getElementById("x-won");
 				div.style.display = "block"; 
+				document.getElementById("x-won").addEventListener("click", startGame, false);
 			}, 4000);
 
 		break;
@@ -117,6 +118,7 @@ UI.updateScreen = function(parGameState) {
 			setTimeout(function(){
 				var div = document.getElementById("o-won");
 				div.style.display = "block"; 
+				document.getElementById("o-won").addEventListener("click", startGame, false);
 			}, 4000);
 
 		break;
@@ -132,6 +134,7 @@ UI.updateScreen = function(parGameState) {
 			setTimeout(function(){
 				var div = document.getElementById("tie");
 				div.style.display = "block"; 
+				document.getElementById("tie").addEventListener("click", startGame, false);
 			}, 4000);
 
 		break;
