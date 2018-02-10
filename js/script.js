@@ -96,6 +96,11 @@ function computerMove() {
 	isGameOver();
 }
 
+function robotMove() {
+	console.log("Entering into robotMove");
+
+}
+
 function playerMove() {
 	console.log("Entering into playerMove");
 
@@ -115,6 +120,9 @@ function playerMove() {
 	}
 	// when you feel eerything is over, then update the screen
 	UI.updateScreen(GAME_STATE);
+
+	// now, let me make my move. as this is a robot, we need to invoke it after human has played his move
+	robotMove();
 }
 
 function isCellMarked(row, col, parGameState) {
