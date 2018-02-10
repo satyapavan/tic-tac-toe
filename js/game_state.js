@@ -31,3 +31,16 @@ var cGameState = function (level) {
 	// Because 'X' always gets to start the game so initialize it with it.
 	this.TURN = this.SYMBOL.human;
 };
+
+cGameState.emptyCells = function() {
+	console.log("Entering into emptyCells");
+
+	for (var row = 0; row < 3; row++) {
+		for (var col = 0; col < 3; col++) {
+			if( this.BOARD[row][col] === "" ) {
+				// available_list = 
+			}
+		}
+	}
+
+}
