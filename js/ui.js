@@ -42,6 +42,8 @@ UI.drawBoard = function() {
 
 UI.drawSVG = function(cell, parGameState) {
 	console.log("Entering into paintScreen");
+	console.log(cell, parGameState);
+	
 	if(parGameState.TURN === parGameState.SYMBOL.human){
 		document.getElementById(cell.id).innerHTML = svg_x;
 	} else if(parGameState.TURN === parGameState.SYMBOL.robot){

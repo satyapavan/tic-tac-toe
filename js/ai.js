@@ -100,102 +100,11 @@ var AI = function() {
      * that is: choose the cell to place its symbol randomly
      * @param turn [String]: the player to play, either X or O
      */
-    function takeABlindMove(turn) {
-        var available = game.currentState.emptyCells();
-        var randomCell = available[Math.floor(Math.random() * available.length)];
-        var action = new AIAction(randomCell);
+    function takeAEasyMove() {
+        var available_cells = game.emptyCells();
+        var randomCell = available_cells[Math.floor(Math.random() * available_cells.length)];
 
-        var next = action.applyTo(game.currentState);
-
-        ui.insertAt(randomCell, turn);
-
-        game.advanceTo(next);
-    }
-
-    /*
-     * private function: make the ai player take a novice move,
-     * that is: mix between choosing the optimal and suboptimal minimax decisions
-     * @param turn [String]: the player to play, either X or O
-     */
-    function takeANoviceMove(turn) {
-        var available = game.currentState.emptyCells();
-
-        //enumerate and calculate the score for each available actions to the ai player
-        var availableActions = available.map(function(pos) {
-            var action =  new AIAction(pos); //create the action object
-            var nextState = action.applyTo(game.currentState); //get next state by applying the action
-
-            action.minimaxVal = minimaxValue(nextState); //calculate and set the action's minimax value
-
-            return action;
-        });
-
-        //sort the enumerated actions list by score
-        if(turn === "X")
-        //X maximizes --> sort the actions in a descending manner to have the action with maximum minimax at first
-            availableActions.sort(AIAction.DESCENDING);
-        else
-        //O minimizes --> sort the actions in an ascending manner to have the action with minimum minimax at first
-            availableActions.sort(AIAction.ASCENDING);
-
-        /*
-         * take the optimal action 40% of the time, and take the 1st suboptimal action 60% of the time
-         */
-        var chosenAction;
-        if(Math.random()*100 <= 40) {
-            chosenAction = availableActions[0];
-        }
-        else {
-            if(availableActions.length >= 2) {
-                //if there is two or more available actions, choose the 1st suboptimal
-                chosenAction = availableActions[1];
-            }
-            else {
-                //choose the only available actions
-                chosenAction = availableActions[0];
-            }
-        }
-        var next = chosenAction.applyTo(game.currentState);
-
-        ui.insertAt(chosenAction.movePosition, turn);
-
-        game.advanceTo(next);
-    };
-
-    /*
-     * private function: make the ai player take a master move,
-     * that is: choose the optimal minimax decision
-     * @param turn [String]: the player to play, either X or O
-     */
-    function takeAMasterMove(turn) {
-        var available = game.currentState.emptyCells();
-
-        //enumerate and calculate the score for each avaialable actions to the ai player
-        var availableActions = available.map(function(pos) {
-            var action =  new AIAction(pos); //create the action object
-            var next = action.applyTo(game.currentState); //get next state by applying the action
-
-            action.minimaxVal = minimaxValue(next); //calculate and set the action's minmax value
-
-            return action;
-        });
-
-        //sort the enumerated actions list by score
-        if(turn === "X")
-        //X maximizes --> sort the actions in a descending manner to have the action with maximum minimax at first
-            availableActions.sort(AIAction.DESCENDING);
-        else
-        //O minimizes --> sort the actions in an ascending manner to have the action with minimum minimax at first
-            availableActions.sort(AIAction.ASCENDING);
-
-
-        //take the first action as it's the optimal
-        var chosenAction = availableActions[0];
-        var next = chosenAction.applyTo(game.currentState);
-
-        ui.insertAt(chosenAction.movePosition, turn);
-
-        game.advanceTo(next);
+        return randomCell;
     }
 
     /*
@@ -206,18 +115,26 @@ var AI = function() {
         console.log("Entering into getBestRobotMove");
 
         game = parGameState;
+        var cell_to_play ; 
 
-        switch(parGameState.level) {
+        console.log(game, parGameState, game.DIFFICULTY_LEVEL);
+
+        switch(game.DIFFICULTY_LEVEL) {
             //invoke the desired behavior based on the level chosen
             case "Easy": 
-                takeAEasyMove(turn); 
+                cell_to_play = takeAEasyMove(); 
                 break;
             case "Medium": 
-                takeAMediumMove(turn); 
+                cell_to_play = takeAEasyMove(); 
+                // takeAMediumMove(turn); 
                 break;
             case "Hard": 
-                takeAHardMove(turn); 
+                // takeAHardMove(turn); 
                 break;
+            default:
+                console.log("Entered into default case, something is not right");
         }
-    };
+
+        return cell_to_play;
+    }
 };

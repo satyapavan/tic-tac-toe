@@ -34,15 +34,18 @@ var cGameState = function (level) {
 
 	this.emptyCells = function() {
 		console.log("Entering into emptyCells");
-
+		var available_list = [];
+		console.log(available_list);
 		for (var row = 0; row < 3; row++) {
 			for (var col = 0; col < 3; col++) {
 				if( this.BOARD[row][col] === "" ) {
-					// available_list = 
+					available_list.push([row, col]);
 				}
 			}
 		}
-	}
+		console.log(available_list);
+		return available_list;
+	};
 
 
 	this.isCellMarked = function(row, col) {
