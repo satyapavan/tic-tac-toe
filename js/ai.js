@@ -148,7 +148,7 @@ var AI = function() {
         });
 
         //sort the enumerated actions list by score
-        if(game.turn === game.SYMBOL.human)
+        if(game.TURN === game.SYMBOL.human)
         //X maximizes --> sort the actions in a descending manner to have the action with maximum minimax at first
             available_moves.sort(AIAction.DESCENDING);
         else
@@ -160,7 +160,7 @@ var AI = function() {
          */
         var chosenMove;
         if(Math.random()*100 <= 60) {
-            console.log("Playing a optimal solution as random <= 40");
+            console.log("Playing a optimal solution as random <= 60");
 
             chosenMove = available_moves[0];
         }
@@ -184,7 +184,9 @@ var AI = function() {
      * @param turn [String]: the player to play, either X or O
      */
     function takeAHardMove() {
-        var available_cells = game.currentState.emptyCells();
+        console.log("Entering into takeAHardMove");
+
+        var available_cells = game.emptyCells();
 
         //enumerate and calculate the score for each avaialable actions to the ai player
         var available_moves = available_cells.map(function(pos) {
@@ -199,7 +201,7 @@ var AI = function() {
         });
 
         //sort the enumerated actions list by score
-        if(turn === "X")
+        if(game.TURN === game.SYMBOL.human)
         //X maximizes --> sort the actions in a descending manner to have the action with maximum minimax at first
             available_moves.sort(AIAction.DESCENDING);
         else

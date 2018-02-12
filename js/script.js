@@ -75,21 +75,12 @@ function playerMove() {
 
 function initializeBoard() {
 	console.log("Entered into initializeBoard");
-	var level = "Medium"; // default value, need to read it from the screen at runtime. TODO
+
+	var level = $("#navbarSupportedContent").find(".active").children().text();
+
 	GAME_STATE = new cGameState(level);
 
-	$("#navbarSupportedContent a").on("click", function(){
-		console.log("Entering to access the difficulty level");
-
-   		$("#navbarSupportedContent").find(".active").removeClass("active");
-   		$(this).parent().addClass("active");
-   		level = $(this).text();
-
-   		console.log(this);
-   		console.log("level = " + level);
-	});
-
-	 console.log(GAME_STATE);
+	console.log(GAME_STATE);
 }
 
 function activateBoard() {
@@ -103,6 +94,21 @@ function activateBoard() {
 	}
 
 	document.getElementById("restartgame").addEventListener("click", startGame, false);
+
+	$("#navbarSupportedContent a").on("click", function(){
+		console.log("Entering to access the difficulty level");
+
+		// make the current one not active
+   		$("#navbarSupportedContent").find(".active").removeClass("active");
+
+   		// make the pressed/new one as active
+   		$(this).parent().addClass("active");
+
+   		console.log("level = " + $(this).text());
+
+   		// you do not want to change level and still continue with current game, hence restart the game
+   		startGame();
+	});
 }
 
 function startGame() {
