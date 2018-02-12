@@ -38,6 +38,10 @@ UI.drawBoard = function() {
 
 	document.getElementById("gameboard").innerHTML = gameboard_code ;
 	document.getElementById("messageboard").innerHTML = "<span><br>Hey there!! Pick a block.</span>";
+
+	document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
+	document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
+
 }
 
 UI.drawSVG = function(cell, parGameState) {
@@ -101,6 +105,9 @@ UI.updateScreen = function(parGameState) {
 
 			UI.animateGameOverCells(parGameState);
 
+			document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
+			document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
+
 			setTimeout(function(){
 				var div = document.getElementById("x-won");
 				div.style.display = "block"; 
@@ -117,6 +124,9 @@ UI.updateScreen = function(parGameState) {
 
 			UI.animateGameOverCells(parGameState);
 
+			document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
+			document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
+			
 			setTimeout(function(){
 				var div = document.getElementById("o-won");
 				div.style.display = "block"; 

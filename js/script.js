@@ -1,5 +1,8 @@
 var GAME_STATE;
 
+var score_human = 0;
+var score_robot = 0;
+
 function computerMove() {
 	console.log("Entering into computerMove");
 	makeEaseMove();
@@ -39,6 +42,13 @@ function robotMove() {
 		// if not, then retransition to the next step/view
 		GAME_STATE.transitionTurn();
 	}
+	else {
+		if(GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerXWon) {
+			score_human++;
+		} else if(GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerOWon) {
+			score_robot++;
+		}
+	}
 	// when you feel eerything is over, then update the screen
 	UI.updateScreen(GAME_STATE);
 
@@ -62,6 +72,14 @@ function playerMove() {
 		// if not, then retransition to the next step/view
 		GAME_STATE.transitionTurn();
 	}
+	else {
+		if(GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerXWon) {
+			score_human++;
+		} else if(GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerOWon) {
+			score_robot++;
+		}
+	}
+	
 	// when you feel eerything is over, then update the screen
 	UI.updateScreen(GAME_STATE);
 

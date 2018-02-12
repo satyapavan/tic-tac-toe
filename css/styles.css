@@ -130,11 +130,14 @@ path:nth-of-type(2n) {
 
 #scoreboard td {
 	height: 32px;
-	width: 96px;
+	width: 120px;
 	padding-bottom: 1px;
 	padding-top: 1px;
-	padding-right: 24px;
-	padding-left: 24px;
+	padding-right: 3px;
+	padding-left: 3px;
+	vertical-align: middle;
+    text-align: center;
+
 	/*border: none;*/
 }
 
@@ -179,6 +182,7 @@ path:nth-of-type(2n) {
 
 #score-x {
 	background-color: #F1EDEC;
+	font-size: .90rem;
 	/*border-width: 0px;*/
 }
 
@@ -193,6 +197,7 @@ path:nth-of-type(2n) {
 
 #score-o {
 	background-color: #F1EDEC;
+	font-size: .90rem;
 	/*border-width: 0px;*/
 }
 
