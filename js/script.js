@@ -9,10 +9,13 @@ function computerMove() {
 function robotMove() {
 	console.log("Entering into robotMove", GAME_STATE);
 
-	// if( GAME_STATE.isGameOver() || GAME_STATE.turn !== GAME_STATE.SYMBOL.robot) {
-	// 	console.log("It seems the game is over, or its not your turn");
-	// 	return false;
-	// }
+	console.log(GAME_STATE.isGameOver());
+	console.log(GAME_STATE.turn !== GAME_STATE.SYMBOL.robot);
+
+	if( GAME_STATE.isGameOver() || GAME_STATE.TURN !== GAME_STATE.SYMBOL.robot) {
+		console.log("It seems the game is over, or its not your turn");
+		return false;
+	}
 
 	var objAI = new AI();
 	console.log(objAI);

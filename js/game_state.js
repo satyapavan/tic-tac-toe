@@ -31,6 +31,28 @@ var cGameState = function (level) {
 	// Because 'X' always gets to start the game so initialize it with it.
 	this.TURN = this.SYMBOL.human;
 
+	this.clone = function() {
+		console.log("Entering into clone", this);
+		var cloneGameState = new cGameState();
+
+		cloneGameState.TOTAL_MOVES = this.TOTAL_MOVES;
+		cloneGameState.O_MOVES_COUNT = this.O_MOVES_COUNT;
+		cloneGameState.WINNING_LINE = this.WINNING_LINE;  // this is an array too, so will it be a problem?
+		cloneGameState.DIFFICULTY_LEVEL = this.DIFFICULTY_LEVEL;
+		cloneGameState.GAME_RESULT = this.GAME_RESULT;
+		cloneGameState.TURN = this.TURN;
+
+		for (var row = 0; row < 3; row++) {
+			for (var col = 0; col < 3; col++) {
+				cloneGameState.BOARD[row][col] = this.BOARD[row][col];
+			}
+		}
+
+		console.log("Original object ", this);
+		console.log("Clone    object ", cloneGameState);
+
+		return cloneGameState;
+	}
 
 	this.emptyCells = function() {
 		console.log("Entering into emptyCells");
@@ -80,6 +102,27 @@ var cGameState = function (level) {
 		this.TURN = this.TURN === this.SYMBOL.human ? this.SYMBOL.robot : this.SYMBOL.human;
 
 		console.log(this);
+	}
+
+	this.score = function() {
+		console.log("Entering into score");
+		var score = 0;
+
+	    if(this.GAME_RESULT === this.RESULTS.playerXWon){
+	        // the x player won
+	        score = 10 - this.O_MOVES_COUNT;
+	    }
+	    else if(this.GAME_RESULT === this.RESULTS.playerOWon) {
+	        //the x player lost
+	        score = -10 + this.O_MOVES_COUNT;
+	    }
+	    else {
+	        //it's a draw
+	        score = 0;
+	    }
+
+	    console.log("Score = [" + score + "]");
+	    return score;
 	}
 
 	this.isGameOver = function() {
