@@ -119,8 +119,11 @@ var AI = function() {
         // it isn't called easy for a reason. its just random.
         // will it be better to atleast add a winning position and blocking position guess to it?
         // it should, as this is a easy move, not a dumb move
-        var randomCell = available_cells[Math.floor(Math.random() * available_cells.length)];
-
+        console.log(available_cells);
+        var temp = Math.floor(Math.random() * available_cells.length);
+        console.log(temp);
+        var randomCell = available_cells[temp];
+        console.log(randomCell);
         return randomCell;
     }
 
@@ -235,18 +238,23 @@ var AI = function() {
             //invoke the desired behavior based on the level chosen
             case "Easy": 
                 cell_to_play = takeAEasyMove(); 
+                console.log("Choosen cell is [" + cell_to_play + "]");
+                return cell_to_play;
                 break;
             case "Medium": 
                 cell_to_play = takeAMediumMove(); 
+                console.log("Choosen cell is [" + cell_to_play.movePosition + "] with a score of [" + cell_to_play.minimaxVal+"]");
+                return cell_to_play.movePosition;
                 break;
             case "Hard": 
                 cell_to_play = takeAHardMove(); 
+                console.log("Choosen cell is [" + cell_to_play.movePosition + "] with a score of [" + cell_to_play.minimaxVal+"]");
+                return cell_to_play.movePosition;
                 break;
             default:
                 console.log("Entered into default case, something is not right");
         }
 
-        console.log("Choosen cell is [" + cell_to_play.movePosition + "] with a score of [" + cell_to_play.minimaxVal+"]");
-        return cell_to_play.movePosition;
+        return;
     }
 };
