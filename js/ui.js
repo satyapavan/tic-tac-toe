@@ -65,9 +65,9 @@ UI.animateGameOverCells = function(parGameState) {
 		console.log("	row=" + row);
 		for (var col = 0; col < 3; col++) {
 			console.log("		col=" + col);
-			if( ( row === pos[0][0] && col === pos[0][1] ) 
+			if( pos != undefined && ( ( row === pos[0][0] && col === pos[0][1] ) 
 				|| ( row === pos[1][0] && col === pos[1][1] ) 
-				|| ( row === pos[2][0] && col === pos[2][1] ) ) {
+				|| ( row === pos[2][0] && col === pos[2][1] ) ) ) {
 				console.log("		pos=[" + row + "][" + col + "]");
 				continue;
 			}
