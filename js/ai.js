@@ -55,8 +55,8 @@ var AI = function() {
      * @param state [State] : the state to calculate its minimax value
      * @returns [Number]: the minimax value of the state
      */
-    function minimaxValue(parGameState) {
-        console.log("Entering into minimaxValue");
+    function minimaxValue(parGameState, counter) {
+        console.log("Entering into minimaxValue " + counter);
 
         if(parGameState.isGameOver()) {
             console.log(parGameState);
@@ -88,7 +88,7 @@ var AI = function() {
             /* calculate the minimax value for all available_cells next states
              * and evaluate the current state's value */
             available_NextStates.forEach(function(nextState) {
-                var nextScore = minimaxValue(nextState);
+                var nextScore = minimaxValue(nextState, counter++);
                 if(parGameState.turn === parGameState.SYMBOL.human) {
                     // X wants to maximize --> update stateScore iff nextScore is larger
                     if(nextScore > stateScore)
@@ -142,7 +142,7 @@ var AI = function() {
             new_state.transitionTurn();
 
             console.log("HELLLLLLO", new_state, game);
-            action.minimaxVal = minimaxValue(new_state); //calculate and set the action's minmax value
+            action.minimaxVal = minimaxValue(new_state, 0); //calculate and set the action's minmax value
 
             return action;
         });
@@ -201,7 +201,7 @@ var AI = function() {
             new_state.markCell(pos[0], pos[1]);
             new_state.transitionTurn();
 
-            action.minimaxVal = minimaxValue(new_state); //calculate and set the action's minmax value
+            action.minimaxVal = minimaxValue(new_state, 0); //calculate and set the action's minmax value
 
             return action;
         });
