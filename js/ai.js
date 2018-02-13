@@ -61,7 +61,7 @@ var AI = function() {
         if(parGameState.isGameOver()) {
             console.log(parGameState);
             //a terminal game state is the base case
-            return parGameState.score(); // TODO
+            return parGameState.score();
         }
         else {
             var stateScore; // this stores the minimax value we'll compute
@@ -73,12 +73,12 @@ var AI = function() {
             // O wants to minimize --> initialize to a value larger than any possible score
                 stateScore = 1000;
 
-            var available_cellsPositions = parGameState.emptyCells();
+            var available_cells = parGameState.emptyCells();
 
             //enumerate next available_cells states using the info form available_cells positions
-            var available_cellsNextStates = available_cellsPositions.map(function(pos) {
+            var available_NextStates = available_cells.map(function(pos) {
 
-                var nextState = parGameState;
+                var nextState = parGameState.clone();
                 nextState.markCell(pos[0], pos[1]);
                 nextState.transitionTurn();
 
@@ -87,7 +87,7 @@ var AI = function() {
 
             /* calculate the minimax value for all available_cells next states
              * and evaluate the current state's value */
-            available_cellsNextStates.forEach(function(nextState) {
+            available_NextStates.forEach(function(nextState) {
                 var nextScore = minimaxValue(nextState);
                 if(parGameState.turn === parGameState.SYMBOL.human) {
                     // X wants to maximize --> update stateScore iff nextScore is larger
@@ -146,6 +146,12 @@ var AI = function() {
 
             return action;
         });
+
+        console.log("available_moves.length = " + available_moves.length); 
+        for(var itr = 0; itr < available_moves.length; itr++) {
+            console.log("itr[" + itr + "] movePosition[" + available_moves[itr].movePosition 
+                + "] minimaxVal[" + available_moves[itr].minimaxVal + "]");
+        }
 
         //sort the enumerated actions list by score
         if(game.TURN === game.SYMBOL.human)
