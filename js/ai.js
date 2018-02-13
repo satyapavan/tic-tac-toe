@@ -89,7 +89,7 @@ var AI = function() {
              * and evaluate the current state's value */
             available_NextStates.forEach(function(nextState) {
                 var nextScore = minimaxValue(nextState, counter++);
-                if(parGameState.turn === parGameState.SYMBOL.human) {
+                if(parGameState.TURN === parGameState.SYMBOL.human) {
                     // X wants to maximize --> update stateScore iff nextScore is larger
                     if(nextScore > stateScore)
                         stateScore = nextScore;
