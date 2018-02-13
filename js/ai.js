@@ -49,6 +49,7 @@ AIAction.DESCENDING = function(firstAction, secondAction) {
  */
 var AI = function() {
 
+    var cnt = 0;
     var game; // this is the game state to handle, in other words this is the parGameState variable
     /*
      * private recursive function that computes the minimax value of a game state
@@ -56,7 +57,7 @@ var AI = function() {
      * @returns [Number]: the minimax value of the state
      */
     function minimaxValue(parGameState, counter) {
-        console.log("Entering into minimaxValue " + counter);
+        console.log("Entering into minimaxValue = " + counter + " = "  + cnt++);
 
         if(parGameState.isGameOver()) {
             console.log(parGameState);
