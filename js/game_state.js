@@ -27,6 +27,7 @@ var cGameState = function (level) {
 	this.WINNING_LINE;
 	this.DIFFICULTY_LEVEL = level;
 	this.GAME_RESULT = this.RESULTS.incomplete;
+	this.SLASH_INFO; // this tells if the win is in a row/col/diag and which one. just to save performance
 
 	// Because 'X' always gets to start the game so initialize it with it.
 	this.TURN = this.SYMBOL.human;
@@ -147,6 +148,7 @@ var cGameState = function (level) {
 				if(line === this.TURN.repeat(3)) {
 					pos = [ [itr, 0], [itr, 1], [itr, 2] ];
 					game_status = true;
+					this.SLASH_INFO = "strike_row_" + (itr+1);
 					break;
 				}
 			}
@@ -159,6 +161,7 @@ var cGameState = function (level) {
 				if(line === this.TURN.repeat(3)) {
 					pos = [ [0, itr], [1, itr], [2, itr] ];
 					game_status = true;
+					this.SLASH_INFO = "strike_col_" + (itr+1);
 					break;
 				}	
 			}
@@ -171,6 +174,7 @@ var cGameState = function (level) {
 			if(line === this.TURN.repeat(3)) {
 				pos = [ [0, 0], [1, 1], [2, 2] ];
 				game_status = true;
+				this.SLASH_INFO = "strike_diag_1";
 				break;
 			}
 
@@ -182,6 +186,7 @@ var cGameState = function (level) {
 			if(line === this.TURN.repeat(3)) {
 				pos = [ [0, 2], [1, 1], [2, 0] ];
 				game_status = true;
+				this.SLASH_INFO = "strike_diag_2";
 				break;
 			}
 
