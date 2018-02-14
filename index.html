@@ -33,7 +33,7 @@
 
 	<body>
 		<header>
-			<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+			<nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
 				<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -65,7 +65,8 @@
 							<a class="nav-link" href="#">Hard</a>
 						</li>
 					</ul>
-					<form class="form-inline my-2 my-lg-0">
+					<form class="form-inline my-2 my-lg-0" style="justify-content: space-between;">
+						<input id="how_to_play" class="btn my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal" value="How To Play?">
 						<button class="btn btn-outline-secondary  my-2 my-sm-0">Reset</button>
 					</form>
 				</div>
@@ -100,6 +101,33 @@
 			</div>		
 		</div>
 	
+		<!-- Modal that will be invoked when we click on the how to play -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" 
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+		 	<div class="modal-dialog" role="document">
+		    	<div class="modal-content">
+		      		<div class="modal-header">
+		        		<h5 class="modal-title" id="exampleModalLabel">How to play</h5>
+		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          			<span aria-hidden="true">&times;</span>
+		        		</button>
+		      		</div>
+		      		<div class="modal-body">
+						Tic-tac-toe is a game for two players, X (human) and O (robot), who take turns marking the spaces in a 3×3 grid. 
+						<br><br>
+						The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.
+						<br><br>
+						These are the various winning positions,
+						<br>
+						<img src="images/tic-tac-toe-how-to.jpg" alt="Winning positions,">
+		      		</div>
+		      		<div class="modal-footer">
+		        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Got it.</button>
+		      		</div>
+		    	</div>
+		  	</div>
+		</div>
+
 
 		<footer>
 		</footer>
