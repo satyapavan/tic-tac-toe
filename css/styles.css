@@ -98,12 +98,6 @@ path {
 	stroke-dasharray: 1000;
   	stroke-dashoffset: 1000;
   	animation: svg-write-ani 1.5s linear forwards;
-    /*animation-name: animate-svg;
-    animation-duration: 1.5s;
-    animation-timing-function: linear;
-    animation-delay: 2s;
-    animation-iteration-count: 2;
-    animation-direction: alternate;*/
 }
 
 /*
@@ -114,12 +108,6 @@ path:nth-of-type(2n) {
 	stroke-dasharray: 1000;
   	stroke-dashoffset: 1000;
   	animation: svg-write-ani 1.5s linear .3s forwards;
-    /*animation-name: animate-svg;
-    animation-duration: 1.5s;
-    animation-timing-function: linear;
-    animation-delay: 2s;
-    animation-iteration-count: 2;
-    animation-direction: alternate;*/
 }
 
 /* get the fade feeling for svg when the cells are in the non-winning zone */
@@ -135,17 +123,6 @@ path:nth-of-type(2n) {
 	stroke-dasharray: 100;
   	stroke-dashoffset: 0;
   	animation: svg-fade-ani 2.5s linear 1.5s forwards;
- /*   animation-name: svg-fade-ani;
-    animation-duration: 1.5s;
-    animation-timing-function: linear;
-
-    this is needed as we need to give time for the cells to be written before we fade them
-	or else the winning cell writing will be overlapped with the winning animation
-
-    animation-delay: 2s;
-    animation-iteration-count: 2;
-    animation-direction: alternate;
-    animation-fill-mode: forwards;*/
 }
 
 /*get the zigzag moving combo for the winning cells*/
@@ -284,7 +261,6 @@ path:nth-of-type(2n) {
 	font-weight: bold;
 	color: #545454;
 
-
 	animation-name:rotater; 
 	animation-duration:1s; 
 	animation-iteration-count:1; 
@@ -305,4 +281,62 @@ path:nth-of-type(2n) {
 	position: absolute;
 	left: 65px;
 	top: 220px;
+}
+
+
+#strike_row, #strike_col, #strike_diag {
+	display: none;
+	position: absolute;
+}
+
+/*this override is because we want the line to be drawn slower than the X and O marks*/
+#strike_row path, #strike_col path, #strike_diag_1 path, #strike_diag path {
+	animation: svg-write-ani 3s linear forwards;
+}
+
+/*this is good*/
+.strike_row_1 {
+	top: -80px;
+	left: 0px;
+}
+
+/*this is good*/
+.strike_row_2 {
+	top: 20px;
+	left: 0px;
+}
+
+/*this is good*/
+.strike_row_3 {
+	top: 122px;
+	left: 0px;
+}
+
+/*this is good*/
+.strike_col_1 {
+	top: 20px;
+	left: -94px;
+}
+
+/*this is good*/
+.strike_col_2 {
+	top: 20px;
+	left: 0px;
+}
+
+/*this is good*/
+.strike_col_3 {
+	top: 20px;
+	left: 94px;
+}
+
+.strike_diag_1 {
+	top: 0px;
+	left: -22px;
+}
+
+.strike_diag_2 {
+	top: 5px;
+	left: 11px;
+	transform: rotate(90deg);
 }

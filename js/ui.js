@@ -9,12 +9,21 @@ const svg_o = '<svg class="noughts" aria-label="O" role="img" viewBox="0 0 128 1
 const svg_xo = '<svg class="crosses" aria-label="X" role="img" viewBox="0 0 128 128" style="width: 96px; height: 96px;"><path d="M16,16L112,112" style="stroke: rgb(84, 84, 84);"></path><path d="M112,16L16,112" style="stroke: rgb(84, 84, 84);"></path></svg>\
 	<svg class="noughts" aria-label="O" role="img" viewBox="0 0 128 128" style="width: 96px; height: 96px;"><path d="M64,16A48,48 0 1,0 64,112A48,48 0 1,0 64,16" style="stroke: rgb(242, 235, 211);"></path></svg>';
 
+const svg_horizontal = '<svg class="crosses" aria-label="H" role="img" viewBox="0 0 128 128" ><path d="M0,64L128,64" style="stroke: rgb(84, 84, 84); stroke-width: 2.5px; "></path></svg>';
+
+const svg_vertical = '<svg class="crosses" aria-label="V" role="img" viewBox="0 0 128 128" ><path d="M64,0L64,128" style="stroke: rgb(84, 84, 84); stroke-width: 2.5px; "></path></svg>';
+
+const svg_diag = '<svg class="crosses" aria-label="D1" role="img" viewBox="0 0 128 128" ><path d="M16,16L128,128" style="stroke: rgb(84, 84, 84); stroke-width: 4px;"></path></svg>';
+
 var UI = {};
 
 UI.drawBoard = function() {
 	console.log("Entering into drawBoard");
 
 	var gameboard_code = '\
+			<div id="strike_row"   class="container">' + svg_horizontal + '</div>\
+			<div id="strike_col"   class="container">' + svg_vertical + '</div>\
+			<div id="strike_diag"   class="container">' + svg_diag + '</div>\
 			<div id="x-won" class="container">' + svg_x + '<span>WINNER</span></div>\
 			<div id="o-won" class="container">' + svg_o + '<span>WINNER</span></div>\
 			<div id="tie"   class="container">' + svg_xo + '<span>It\'s a TIE</span></div>\
@@ -59,6 +68,30 @@ UI.animateGameOverCells = function(parGameState) {
 	console.log("Entering into animateGameOverCells");
 
 	var pos = parGameState.WINNING_LINE;
+
+	if( pos != undefined ) {
+		if( (parGameState.SLASH_INFO).match(/strike_row/g) ) {
+			setTimeout(function(){
+				document.getElementById("strike_row").classList.add(parGameState.SLASH_INFO);
+				var div = document.getElementById("strike_row");
+				div.style.display = "block"; 
+			}, 1000);
+		}
+		else if( (parGameState.SLASH_INFO).match(/strike_col/g) ) {
+			setTimeout(function(){
+				document.getElementById("strike_col").classList.add(parGameState.SLASH_INFO);
+				var div = document.getElementById("strike_col");
+				div.style.display = "block"; 
+			}, 1000);
+		}
+		else if( (parGameState.SLASH_INFO).match(/strike_diag/g) ) {
+			setTimeout(function(){
+				document.getElementById("strike_diag").classList.add(parGameState.SLASH_INFO);
+				var div = document.getElementById("strike_diag");
+				div.style.display = "block"; 
+			}, 1000);
+		}
+	}
 
 	// this is too bad logic, n^3
 	for (var row = 0; row < 3; row++) {
