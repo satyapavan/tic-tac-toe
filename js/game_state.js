@@ -206,5 +206,107 @@ var cGameState = function (level) {
 
 		return game_status;
 	}
-};
 
+
+	this.getFinishMoves = function(player) {
+		logger.log("Entered into getFinishMoves : " + player + " -> " + this.TOTAL_MOVES);
+		
+		var finish_moves = [];
+
+		// game over could be 5 moves, but not here. In below case, number of steps are 3, but if o do not 
+		// make the right move at 4, then the game will be over in 5.
+		// 		. . .	x o .
+		// 		. . .	x . .
+		// 		. . .	. . .
+
+		if(this.TOTAL_MOVES < 3){
+			logger.log("Too few moves, there are no finish moves yet");
+			this.GAME_STATUS = this.RESULTS.incomplete ; 
+			return false;
+		}
+
+		do {
+			// check for row success
+			for(var row = 0; row < 3; ++row) {
+				line = this.BOARD[row].join('');
+
+				if(line === player.repeat(2)) {
+					for(var col = 0; col < 3; ++col) {
+						if(this.BOARD[row][col] === "" ) {
+							finish_moves.push([row, col]);
+							break;
+						}
+					}
+					break;
+				}
+			}
+
+			// we got a winning position, so lets get out
+			if(finish_moves.length > 0) {
+				break;
+			}
+
+			// check for col success
+			for (var col = 0; col < 3; ++col) {
+				line = [this.BOARD[0][col], this.BOARD[1][col], this.BOARD[2][col]];
+				line = line.join('');
+
+				if(line === player.repeat(2)) {
+					for(var row = 0; row < 3; ++row) {
+						if(this.BOARD[row][col] === "" ) {
+							finish_moves.push([row, col]);
+							break;
+						}
+					}
+					break;
+				}	
+			}
+
+			// we got a winning position, so lets get out
+			if(finish_moves.length > 0) {
+				break;
+			}
+
+			// now check for diagonal success
+
+			line = [this.BOARD[0][0], this.BOARD[1][1], this.BOARD[2][2]];
+			line = line.join('');
+
+			if(line === player.repeat(2)) {
+
+				if(this.BOARD[0][0] === "" )
+					finish_moves.push([0, 0]);
+				else if(this.BOARD[1][1] === "" )
+					finish_moves.push([1, 1]);
+				else if(this.BOARD[2][2] === "" )
+					finish_moves.push([2, 2]);
+
+				break;
+			}
+
+			// now the other diagoal check
+
+			line = [this.BOARD[0][2], this.BOARD[1][1], this.BOARD[2][0]];
+			line = line.join('');
+
+			if(line === player.repeat(2)) {
+
+				if(this.BOARD[0][2] === "" )
+					finish_moves.push([0, 2]);
+				else if(this.BOARD[1][1] === "" )
+					finish_moves.push([1, 1]);
+				else if(this.BOARD[2][0] === "" )
+					finish_moves.push([2, 0]);
+
+				break;
+			}
+
+		} while(0);
+
+		logger.log(finish_moves);
+		logger.log(finish_moves[0]);
+
+		if(finish_moves.length > 0)
+			return finish_moves[0];
+	}
+};

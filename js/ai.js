@@ -109,37 +109,24 @@ var AI = function() {
         }
     }
 
-    /*
-     * private function: make the ai player take a blind move
-     * that is: choose the cell to place its symbol randomly
-     * @param turn [String]: the player to play, either X or O
-     */
+    function getMoveWrapper(probability) {
+        // if we pass out symbol, we get a winning move
+        var finish_moves = game.getFinishMoves(game.TURN);
 
-    function takeAEasyMove() {
-        logger.log("Entering into takeAEasyMove");
+        if(finish_moves !== undefined && finish_moves.length > 0) {
+            return finish_moves;
+        } 
+
+        // if we pass opponents move, then we get a blocking move.
+        var finish_moves = game.getFinishMoves(game.TURN === game.SYMBOL.human ? game.SYMBOL.robot : game.SYMBOL.human);
+
+        if(finish_moves !== undefined && finish_moves.length > 0) {
+            return finish_moves;
+        } 
+
         var available_cells = game.emptyCells();
 
-        // it isn't called easy for a reason. its just random.
-        // will it be better to atleast add a winning position and blocking position guess to it?
-        // it should, as this is a easy move, not a dumb move
-        logger.log(available_cells);
-        var temp = Math.floor(Math.random() * available_cells.length);
-        logger.log(temp);
-        var randomCell = available_cells[temp];
-        logger.log(randomCell);
-        return randomCell;
-    }
-
-
-    /*
-     * private function: make the ai player take a novice move,
-     * that is: mix between choosing the optimal and suboptimal minimax decisions
-     * @param turn [String]: the player to play, either X or O
-     */
-    function takeAMediumMove() {
-        logger.log("Entering into takeAMediumMove");
-        var available_cells = game.emptyCells();
-
+        isLogging = false;
         //enumerate and calculate the score for each available_cells actions to the ai player
         var available_moves = available_cells.map(function(pos) {
 
@@ -152,6 +139,8 @@ var AI = function() {
 
             return action;
         });
+
+        isLogging = true;
 
         logger.log("available_moves.length = " + available_moves.length); 
         for(var itr = 0; itr < available_moves.length; itr++) {
@@ -171,8 +160,8 @@ var AI = function() {
          * take the optimal action 40% of the time, and take the 1st suboptimal action 60% of the time
          */
         var chosenMove;
-        if(Math.random()*100 <= 60) {
-            logger.log("Playing a optimal solution as random <= 60");
+        if(Math.random()*100 <= probability) {
+            logger.log("Playing a optimal solution as random <= probability");
 
             chosenMove = available_moves[0];
         }
@@ -187,7 +176,45 @@ var AI = function() {
             }
         }
 
-        return chosenMove;
+        return chosenMove;  
+    }
+    /*
+     * private function: make the ai player take a blind move
+     * that is: choose the cell to place its symbol randomly
+     * @param turn [String]: the player to play, either X or O
+     */
+
+    function takeAEasyMove() {
+        logger.log("Entering into takeAEasyMove");
+
+        // if we pass out symbol, we get a winning move
+
+        var finish_moves = game.getFinishMoves(game.TURN);
+
+        if(finish_moves !== undefined && finish_moves.length > 0) {
+            return finish_moves;
+        } 
+
+        var available_cells = game.emptyCells();
+
+        // it isn't called easy for a reason. its just random.
+        // will it be better to atleast add a winning position and blocking position guess to it?
+        // it should, as this is a easy move, not a dumb move
+        var temp = Math.floor(Math.random() * available_cells.length);
+        var randomCell = available_cells[temp];
+        return randomCell;
+    }
+
+
+    /*
+     * private function: make the ai player take a novice move,
+     * that is: mix between choosing the optimal and suboptimal minimax decisions
+     * @param turn [String]: the player to play, either X or O
+     */
+    function takeAMediumMove() {
+        logger.log("Entering into takeAMediumMove");
+        return getMoveWrapper(60); // play a good step all the time with 60% probability
+
     };
 
     /*
@@ -197,31 +224,7 @@ var AI = function() {
      */
     function takeAHardMove() {
         logger.log("Entering into takeAHardMove");
-
-        var available_cells = game.emptyCells();
-
-        //enumerate and calculate the score for each avaialable actions to the ai player
-        var available_moves = available_cells.map(function(pos) {
-            var action =  new AIAction(pos); //create the action object
-            var new_state =  game.clone(); //clone the game state object for more permutations
-            new_state.markCell(pos[0], pos[1]);
-            new_state.transitionTurn();
-
-            action.minimaxVal = minimaxValue(new_state); //calculate and set the action's minmax value
-
-            return action;
-        });
-
-        //sort the enumerated actions list by score
-        if(game.TURN === game.SYMBOL.human)
-        //X maximizes --> sort the actions in a descending manner to have the action with maximum minimax at first
-            available_moves.sort(AIAction.DESCENDING);
-        else
-        //O minimizes --> sort the actions in an ascending manner to have the action with minimum minimax at first
-            available_moves.sort(AIAction.ASCENDING);
-
-        //take the first action as it's the optimal
-        return available_moves[0];
+        return getMoveWrapper(100); // play a good step all the time with 100% probability
     }
 
 
@@ -240,23 +243,24 @@ var AI = function() {
             //invoke the desired behavior based on the level chosen
             case "Easy": 
                 cell_to_play = takeAEasyMove(); 
-                logger.log("Choosen cell is [" + cell_to_play + "]");
-                return cell_to_play;
                 break;
             case "Medium": 
                 cell_to_play = takeAMediumMove(); 
-                logger.log("Choosen cell is [" + cell_to_play.movePosition + "] with a score of [" + cell_to_play.minimaxVal+"]");
-                return cell_to_play.movePosition;
                 break;
             case "Hard": 
                 cell_to_play = takeAHardMove(); 
-                logger.log("Choosen cell is [" + cell_to_play.movePosition + "] with a score of [" + cell_to_play.minimaxVal+"]");
-                return cell_to_play.movePosition;
                 break;
             default:
                 logger.log("Entered into default case, something is not right");
         }
 
-        return;
+        if(cell_to_play.movePosition === undefined) {
+            logger.log("Choosen cell is [" + cell_to_play + "]");
+            return cell_to_play;
+        }
+        else {
+            logger.log("Choosen cell is [" + cell_to_play.movePosition + "] with a score of [" + cell_to_play.minimaxVal+"]");
+            return cell_to_play.movePosition ;
+        }
     }
 };

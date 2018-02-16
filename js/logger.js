@@ -1,5 +1,5 @@
 var logger = {};
-var isLogging = false;
+var isLogging = true;
 
 // this does not yet work for multiple parameters. its a TODO
 logger.log = function(data) {
