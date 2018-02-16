@@ -33,7 +33,7 @@ var cGameState = function (level) {
 	this.TURN = this.SYMBOL.human;
 
 	this.clone = function() {
-		console.log("Entering into clone", this);
+		console.log("Entering into clone");
 		var cloneGameState = new cGameState();
 
 		cloneGameState.TOTAL_MOVES = this.TOTAL_MOVES;
@@ -58,7 +58,6 @@ var cGameState = function (level) {
 	this.emptyCells = function() {
 		console.log("Entering into emptyCells");
 		var available_list = [];
-		console.log(available_list);
 		for (var row = 0; row < 3; row++) {
 			for (var col = 0; col < 3; col++) {
 				if( this.BOARD[row][col] === "" ) {
@@ -98,11 +97,7 @@ var cGameState = function (level) {
 
 	this.transitionTurn = function() {
 		console.log("Entering into transitionTurn");
-		console.log(this);
-		this.emptyCells();
 		this.TURN = this.TURN === this.SYMBOL.human ? this.SYMBOL.robot : this.SYMBOL.human;
-
-		console.log(this);
 	}
 
 	this.score = function() {
@@ -127,7 +122,7 @@ var cGameState = function (level) {
 	}
 
 	this.isGameOver = function() {
-		console.log("Entered into isGameOver");
+		console.log("Entered into isGameOver : " + this.TOTAL_MOVES);
 		
 		var line;
 		var pos;
@@ -203,7 +198,7 @@ var cGameState = function (level) {
 				this.GAME_RESULT = this.RESULTS.playerOWon ;
 			}
 
-		} else if(this.TOTAL_MOVES == 9) {
+		} else if(this.TOTAL_MOVES >= 9) {
 			console.log("All the steps are exhausted, its a TIE");
 			this.GAME_RESULT = this.RESULTS.tie;
 			game_status = true;
