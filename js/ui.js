@@ -18,7 +18,7 @@ const svg_diag = '<svg class="crosses" aria-label="D1" role="img" viewBox="0 0 1
 var UI = {};
 
 UI.drawBoard = function() {
-	console.log("Entering into drawBoard");
+	logger.log("Entering into drawBoard");
 
 	var gameboard_code = '\
 			<div id="strike_row"   class="container">' + svg_horizontal + '</div>\
@@ -54,8 +54,8 @@ UI.drawBoard = function() {
 }
 
 UI.drawSVG = function(cell, parGameState) {
-	console.log("Entering into paintScreen");
-	console.log(cell, parGameState);
+	logger.log("Entering into paintScreen");
+	logger.log(cell, parGameState);
 	
 	if(parGameState.TURN === parGameState.SYMBOL.human){
 		document.getElementById(cell.id).innerHTML = svg_x;
@@ -65,7 +65,7 @@ UI.drawSVG = function(cell, parGameState) {
 }
 
 UI.animateGameOverCells = function(parGameState) {
-	console.log("Entering into animateGameOverCells");
+	logger.log("Entering into animateGameOverCells");
 
 	var pos = parGameState.WINNING_LINE;
 
@@ -95,23 +95,23 @@ UI.animateGameOverCells = function(parGameState) {
 
 	// this is too bad logic, n^3
 	for (var row = 0; row < 3; row++) {
-		console.log("	row=" + row);
+		logger.log("	row=" + row);
 		for (var col = 0; col < 3; col++) {
-			console.log("		col=" + col);
+			logger.log("		col=" + col);
 			if( pos != undefined && ( ( row === pos[0][0] && col === pos[0][1] ) 
 				|| ( row === pos[1][0] && col === pos[1][1] ) 
 				|| ( row === pos[2][0] && col === pos[2][1] ) ) ) {
-				console.log("		pos=[" + row + "][" + col + "]");
+				logger.log("		pos=[" + row + "][" + col + "]");
 				continue;
 			}
-			console.log("		adding class for cell-"+(row+1)+(col+1));
+			logger.log("		adding class for cell-"+(row+1)+(col+1));
 			document.getElementById("cell-"+(row+1)+(col+1)).classList.add('lost-cells-gameover');
 		}
 	}
 }
 
 UI.updateScreen = function(parGameState) {
-	console.log("Entering into paintScreen");
+	logger.log("Entering into paintScreen");
 
 	switch(parGameState.GAME_RESULT) {
 		case parGameState.RESULTS.incomplete :
@@ -186,7 +186,7 @@ UI.updateScreen = function(parGameState) {
 
 		///////////////////////////////////////////////////////////
 		default:
-			console.log("What the hell happened?");
+			logger.log("What the hell happened?");
 			document.getElementById("messageboard").innerHTML = "<br>what the hell just happened? huh?";
 			document.getElementById("score-o").classList.add('focus-score-o');
 			document.getElementById("score-x").classList.add('focus-score-x');

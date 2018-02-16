@@ -33,7 +33,7 @@ var cGameState = function (level) {
 	this.TURN = this.SYMBOL.human;
 
 	this.clone = function() {
-		console.log("Entering into clone");
+		logger.log("Entering into clone");
 		var cloneGameState = new cGameState();
 
 		cloneGameState.TOTAL_MOVES = this.TOTAL_MOVES;
@@ -49,14 +49,14 @@ var cGameState = function (level) {
 			}
 		}
 
-		console.log("Original object ", this);
-		console.log("Clone    object ", cloneGameState);
+		logger.log("Original object ", this);
+		logger.log("Clone    object ", cloneGameState);
 
 		return cloneGameState;
 	}
 
 	this.emptyCells = function() {
-		console.log("Entering into emptyCells");
+		logger.log("Entering into emptyCells");
 		var available_list = [];
 		for (var row = 0; row < 3; row++) {
 			for (var col = 0; col < 3; col++) {
@@ -65,20 +65,20 @@ var cGameState = function (level) {
 				}
 			}
 		}
-		console.log(available_list);
+		logger.log(available_list);
 		return available_list;
 	};
 
 
 	this.isCellMarked = function(row, col) {
 		var status = this.BOARD[row][col] !== "";
-		console.log("isCellMarked[" + status + "]");
+		logger.log("isCellMarked[" + status + "]");
 		return status;
 	}
 
 	this.markCell = function(row, col) {
 		if(this.isCellMarked(row, col)) {
-			console.log("Cell is already marked");
+			logger.log("Cell is already marked");
 			return false;
 		}
 
@@ -90,18 +90,18 @@ var cGameState = function (level) {
 		if(this.TURN === this.SYMBOL.robot)
 			this.O_MOVES_COUNT++ ;  // This is used for score calculation
 
-		console.log(this);
+		logger.log(this);
 
 		return true;
 	}
 
 	this.transitionTurn = function() {
-		console.log("Entering into transitionTurn");
+		logger.log("Entering into transitionTurn");
 		this.TURN = this.TURN === this.SYMBOL.human ? this.SYMBOL.robot : this.SYMBOL.human;
 	}
 
 	this.score = function() {
-		console.log("Entering into score");
+		logger.log("Entering into score");
 		var score = 0;
 
 	    if(this.GAME_RESULT === this.RESULTS.playerXWon){
@@ -117,12 +117,12 @@ var cGameState = function (level) {
 	        score = 0;
 	    }
 
-	    console.log("Score = [" + score + "]");
+	    logger.log("Score = [" + score + "]");
 	    return score;
 	}
 
 	this.isGameOver = function() {
-		console.log("Entered into isGameOver : " + this.TOTAL_MOVES);
+		logger.log("Entered into isGameOver : " + this.TOTAL_MOVES);
 		
 		var line;
 		var pos;
@@ -130,7 +130,7 @@ var cGameState = function (level) {
 
 		// make sure there is no <= there, elese the gameover is not coming after 5 moves. yuck!
 		if(this.TOTAL_MOVES < 5){
-			console.log("Too few moves, game cannot be over yet");
+			logger.log("Too few moves, game cannot be over yet");
 			this.GAME_STATUS = this.RESULTS.incomplete ; 
 			return false;
 		}
@@ -188,7 +188,7 @@ var cGameState = function (level) {
 		} while(0);
 
 		if(game_status) {
-			console.log("WINNER OF THE GAME IS " + this.TURN);
+			logger.log("WINNER OF THE GAME IS " + this.TURN);
 
 			this.WINNING_LINE = pos;
 
@@ -199,7 +199,7 @@ var cGameState = function (level) {
 			}
 
 		} else if(this.TOTAL_MOVES >= 9) {
-			console.log("All the steps are exhausted, its a TIE");
+			logger.log("All the steps are exhausted, its a TIE");
 			this.GAME_RESULT = this.RESULTS.tie;
 			game_status = true;
 		}

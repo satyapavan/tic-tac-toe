@@ -17,7 +17,7 @@ var AIAction = function(pos) {
  * @return [Number]: -1, 1, or 0
  */
 AIAction.ASCENDING = function(firstAction, secondAction) {
-    console.log("Entering into AIAction.ASCENDING");
+    logger.log("Entering into AIAction.ASCENDING");
     if(firstAction.minimaxVal < secondAction.minimaxVal)
         return -1; //indicates that firstAction goes before secondAction
     else if(firstAction.minimaxVal > secondAction.minimaxVal)
@@ -33,7 +33,7 @@ AIAction.ASCENDING = function(firstAction, secondAction) {
  * @return [Number]: -1, 1, or 0
  */
 AIAction.DESCENDING = function(firstAction, secondAction) {
-    console.log("Entering into AIAction.DESCENDING");
+    logger.log("Entering into AIAction.DESCENDING");
     if(firstAction.minimaxVal > secondAction.minimaxVal)
         return -1; //indicates that firstAction goes before secondAction
     else if(firstAction.minimaxVal < secondAction.minimaxVal)
@@ -49,6 +49,7 @@ AIAction.DESCENDING = function(firstAction, secondAction) {
  */
 var AI = function() {
 
+    // this tells the number of times the minimaxVal function is called
     var cnt = 0;
     var game; // this is the game state to handle, in other words this is the parGameState variable
     /*
@@ -56,12 +57,10 @@ var AI = function() {
      * @param state [State] : the state to calculate its minimax value
      * @returns [Number]: the minimax value of the state
      */
-    function minimaxValue(parGameState, counter) {
-        console.log("Entering into minimaxValue = " + counter + " = "  + cnt++);
+    function minimaxValue(parGameState) {
+        logger.log("Entering into minimaxValue = " + cnt++);
 
         if(parGameState.isGameOver()) {
-            console.log(parGameState);
-            //a terminal game state is the base case
             return parGameState.score();
         }
         else {
@@ -75,6 +74,7 @@ var AI = function() {
                 stateScore = 1000;
 
             var available_cells = parGameState.emptyCells();
+            logger.log("available_cells.length = " + available_cells.length);
 
             //enumerate next available_cells states using the info form available_cells positions
             var available_NextStates = available_cells.map(function(pos) {
@@ -86,10 +86,13 @@ var AI = function() {
                 return nextState;
             });
 
+            logger.log("available_NextStates.length = " + available_NextStates.length);
+
             /* calculate the minimax value for all available_cells next states
              * and evaluate the current state's value */
             available_NextStates.forEach(function(nextState) {
-                var nextScore = minimaxValue(nextState, counter++);
+                var nextScore = minimaxValue(nextState);
+
                 if(parGameState.TURN === parGameState.SYMBOL.human) {
                     // X wants to maximize --> update stateScore iff nextScore is larger
                     if(nextScore > stateScore)
@@ -113,17 +116,17 @@ var AI = function() {
      */
 
     function takeAEasyMove() {
-        console.log("Entering into takeAEasyMove");
+        logger.log("Entering into takeAEasyMove");
         var available_cells = game.emptyCells();
 
         // it isn't called easy for a reason. its just random.
         // will it be better to atleast add a winning position and blocking position guess to it?
         // it should, as this is a easy move, not a dumb move
-        console.log(available_cells);
+        logger.log(available_cells);
         var temp = Math.floor(Math.random() * available_cells.length);
-        console.log(temp);
+        logger.log(temp);
         var randomCell = available_cells[temp];
-        console.log(randomCell);
+        logger.log(randomCell);
         return randomCell;
     }
 
@@ -134,7 +137,7 @@ var AI = function() {
      * @param turn [String]: the player to play, either X or O
      */
     function takeAMediumMove() {
-        console.log("Entering into takeAMediumMove");
+        logger.log("Entering into takeAMediumMove");
         var available_cells = game.emptyCells();
 
         //enumerate and calculate the score for each available_cells actions to the ai player
@@ -145,15 +148,14 @@ var AI = function() {
             new_state.markCell(pos[0], pos[1]);
             new_state.transitionTurn();
 
-            console.log("HELLLLLLO", new_state, game);
-            action.minimaxVal = minimaxValue(new_state, 0); //calculate and set the action's minmax value
+            action.minimaxVal = minimaxValue(new_state); //calculate and set the action's minmax value
 
             return action;
         });
 
-        console.log("available_moves.length = " + available_moves.length); 
+        logger.log("available_moves.length = " + available_moves.length); 
         for(var itr = 0; itr < available_moves.length; itr++) {
-            console.log("itr[" + itr + "] movePosition[" + available_moves[itr].movePosition 
+            logger.log("itr[" + itr + "] movePosition[" + available_moves[itr].movePosition 
                 + "] minimaxVal[" + available_moves[itr].minimaxVal + "]");
         }
 
@@ -170,7 +172,7 @@ var AI = function() {
          */
         var chosenMove;
         if(Math.random()*100 <= 60) {
-            console.log("Playing a optimal solution as random <= 60");
+            logger.log("Playing a optimal solution as random <= 60");
 
             chosenMove = available_moves[0];
         }
@@ -194,7 +196,7 @@ var AI = function() {
      * @param turn [String]: the player to play, either X or O
      */
     function takeAHardMove() {
-        console.log("Entering into takeAHardMove");
+        logger.log("Entering into takeAHardMove");
 
         var available_cells = game.emptyCells();
 
@@ -205,7 +207,7 @@ var AI = function() {
             new_state.markCell(pos[0], pos[1]);
             new_state.transitionTurn();
 
-            action.minimaxVal = minimaxValue(new_state, 0); //calculate and set the action's minmax value
+            action.minimaxVal = minimaxValue(new_state); //calculate and set the action's minmax value
 
             return action;
         });
@@ -229,7 +231,7 @@ var AI = function() {
      * @param turn [String]: the player to play, either X or O
      */
     this.getBestRobotMove = function(parGameState) {
-        console.log("Entering into getBestRobotMove");
+        logger.log("Entering into getBestRobotMove");
 
         game = parGameState.clone();
         var cell_to_play ; 
@@ -238,21 +240,21 @@ var AI = function() {
             //invoke the desired behavior based on the level chosen
             case "Easy": 
                 cell_to_play = takeAEasyMove(); 
-                console.log("Choosen cell is [" + cell_to_play + "]");
+                logger.log("Choosen cell is [" + cell_to_play + "]");
                 return cell_to_play;
                 break;
             case "Medium": 
                 cell_to_play = takeAMediumMove(); 
-                console.log("Choosen cell is [" + cell_to_play.movePosition + "] with a score of [" + cell_to_play.minimaxVal+"]");
+                logger.log("Choosen cell is [" + cell_to_play.movePosition + "] with a score of [" + cell_to_play.minimaxVal+"]");
                 return cell_to_play.movePosition;
                 break;
             case "Hard": 
                 cell_to_play = takeAHardMove(); 
-                console.log("Choosen cell is [" + cell_to_play.movePosition + "] with a score of [" + cell_to_play.minimaxVal+"]");
+                logger.log("Choosen cell is [" + cell_to_play.movePosition + "] with a score of [" + cell_to_play.minimaxVal+"]");
                 return cell_to_play.movePosition;
                 break;
             default:
-                console.log("Entered into default case, something is not right");
+                logger.log("Entered into default case, something is not right");
         }
 
         return;

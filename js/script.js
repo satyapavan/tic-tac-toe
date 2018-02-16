@@ -4,19 +4,19 @@ var score_human = 0;
 var score_robot = 0;
 
 function computerMove() {
-	console.log("Entering into computerMove");
+	logger.log("Entering into computerMove");
 	makeEaseMove();
 	isGameOver();
 }
 
 function robotMove() {
-	console.log("Entering into robotMove", GAME_STATE);
+	logger.log("Entering into robotMove", GAME_STATE);
 
-	console.log(GAME_STATE.isGameOver());
-	console.log(GAME_STATE.turn !== GAME_STATE.SYMBOL.robot);
+	logger.log(GAME_STATE.isGameOver());
+	logger.log(GAME_STATE.turn !== GAME_STATE.SYMBOL.robot);
 
 	if( GAME_STATE.isGameOver() || GAME_STATE.TURN !== GAME_STATE.SYMBOL.robot) {
-		console.log("It seems the game is over, or its not your turn");
+		logger.log("It seems the game is over, or its not your turn");
 		return false;
 	}
 
@@ -24,7 +24,7 @@ function robotMove() {
 	var cell_to_play = objAI.getBestRobotMove(GAME_STATE);
 
 	if( GAME_STATE.isCellMarked(cell_to_play[0], cell_to_play[1])) {
-		console.log("As the cell is already marked, do not do anything");
+		logger.log("As the cell is already marked, do not do anything");
 		return true;
 	}
 
@@ -55,10 +55,10 @@ function robotMove() {
 }
 
 function playerMove() {
-	console.log("Entering into playerMove");
+	logger.log("Entering into playerMove");
 
 	if( GAME_STATE.isCellMarked(this.getAttribute("data-row"), this.getAttribute("data-col"))) {
-		console.log("As the cell is already marked, do not do anything");
+		logger.log("As the cell is already marked, do not do anything");
 		return true;
 	}
 
@@ -91,21 +91,21 @@ function playerMove() {
 
 
 function initializeBoard() {
-	console.log("Entered into initializeBoard");
+	logger.log("Entered into initializeBoard");
 
 	var level = $("#navbarSupportedContent").find(".active").children().text();
 
 	GAME_STATE = new cGameState(level);
 
-	console.log(GAME_STATE);
+	logger.log(GAME_STATE);
 }
 
 function activateBoard() {
-	console.log("Entered into activateBoard");
+	logger.log("Entered into activateBoard");
 
 	for (var row = 1; row <= 3; row++) {
 		for (var col = 1; col <= 3; col++) {
-			console.log("Adding listener for row[" + row + "] col[" + col + "]");	
+			logger.log("Adding listener for row[" + row + "] col[" + col + "]");	
 			document.getElementById("cell-"+row+col).addEventListener("click", playerMove, false);
 		}
 	}
@@ -113,7 +113,7 @@ function activateBoard() {
 	document.getElementById("restartgame").addEventListener("click", startGame, false);
 
 	$("#navbarSupportedContent a").on("click", function(){
-		console.log("Entering to access the difficulty level");
+		logger.log("Entering to access the difficulty level");
 
 		// make the current one not active
    		$("#navbarSupportedContent").find(".active").removeClass("active");
@@ -121,7 +121,7 @@ function activateBoard() {
    		// make the pressed/new one as active
    		$(this).parent().addClass("active");
 
-   		console.log("level = " + $(this).text());
+   		logger.log("level = " + $(this).text());
 
    		// you do not want to change level and still continue with current game, hence restart the game
    		startGame();
@@ -129,7 +129,7 @@ function activateBoard() {
 }
 
 function startGame() {
-	console.log("Entered into startGame");
+	logger.log("Entered into startGame");
 	initializeBoard();
 	UI.drawBoard();
 	activateBoard();
