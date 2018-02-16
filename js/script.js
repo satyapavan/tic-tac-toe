@@ -21,7 +21,6 @@ function robotMove() {
 	}
 
 	var objAI = new AI();
-	console.log(objAI);
 	var cell_to_play = objAI.getBestRobotMove(GAME_STATE);
 
 	if( GAME_STATE.isCellMarked(cell_to_play[0], cell_to_play[1])) {
