@@ -333,10 +333,11 @@ path:nth-of-type(2n) {
 .strike_diag_1 {
 	top: 0px;
 	left: -22px;
+	transform: rotate(2deg);
 }
 
 .strike_diag_2 {
 	top: 5px;
 	left: 11px;
-	transform: rotate(90deg);
+	transform: rotate(88deg);
 }
