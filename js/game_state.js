@@ -1,7 +1,6 @@
 // This holds all the state variables of the current board game. an instance of this and you will get everything
 var cGameState = function (level) {
-
-	// Without the use of 'this', these will be not accessable from outside world.
+	// Without the use of 'this', these will be not accessible from outside world.
 	// adding 'this' makes them public variables, else they will be considered as private variables.
 
 	this.SYMBOL = {
@@ -88,7 +87,7 @@ var cGameState = function (level) {
 		this.TOTAL_MOVES++;
 
 		if(this.TURN === this.SYMBOL.robot)
-			this.O_MOVES_COUNT++ ;  // This is used for score calculation
+			this.O_MOVES_COUNT++ ; // This is used for score calculation
 
 		logger.log(this);
 
@@ -109,11 +108,11 @@ var cGameState = function (level) {
 	        score = 10 - this.O_MOVES_COUNT;
 	    }
 	    else if(this.GAME_RESULT === this.RESULTS.playerOWon) {
-	        //the x player lost
+	        // the x player lost
 	        score = -10 + this.O_MOVES_COUNT;
 	    }
 	    else {
-	        //it's a draw
+	        // it's a draw
 	        score = 0;
 	    }
 
@@ -129,7 +128,7 @@ var cGameState = function (level) {
 		var game_status = false;
 
 		// make sure there is no <= there, elese the gameover is not coming after 5 moves. yuck!
-		if(this.TOTAL_MOVES < 5){
+		if(this.TOTAL_MOVES < 5) {
 			logger.log("Too few moves, game cannot be over yet");
 			this.GAME_STATUS = this.RESULTS.incomplete ; 
 			return false;
@@ -219,7 +218,7 @@ var cGameState = function (level) {
 		// 		. . .	x . .
 		// 		. . .	. . .
 
-		if(this.TOTAL_MOVES < 3){
+		if(this.TOTAL_MOVES < 3) {
 			logger.log("Too few moves, there are no finish moves yet");
 			this.GAME_STATUS = this.RESULTS.incomplete ; 
 			return false;
