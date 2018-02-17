@@ -68,21 +68,21 @@ UI.animateGameOverCells = function(parGameState) {
 
 	if( pos != undefined ) {
 		if( (parGameState.SLASH_INFO).match(/strike_row/g) ) {
-			setTimeout(function(){
+			setTimeout(function() {
 				document.getElementById("strike_row").classList.add(parGameState.SLASH_INFO);
 				var div = document.getElementById("strike_row");
 				div.style.display = "block"; 
 			}, 1000);
 		}
 		else if( (parGameState.SLASH_INFO).match(/strike_col/g) ) {
-			setTimeout(function(){
+			setTimeout(function() {
 				document.getElementById("strike_col").classList.add(parGameState.SLASH_INFO);
 				var div = document.getElementById("strike_col");
 				div.style.display = "block"; 
 			}, 1000);
 		}
 		else if( (parGameState.SLASH_INFO).match(/strike_diag/g) ) {
-			setTimeout(function(){
+			setTimeout(function() {
 				document.getElementById("strike_diag").classList.add(parGameState.SLASH_INFO);
 				var div = document.getElementById("strike_diag");
 				div.style.display = "block"; 
