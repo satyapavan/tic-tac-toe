@@ -39,9 +39,24 @@ AIAction.DESCENDING = function(firstAction, secondAction) {
     else if(firstAction.minimaxVal < secondAction.minimaxVal)
         return 1; //indicates that secondAction goes before firstAction
     else
-        return 0; //indicates a time
+        return 0; //indicates a tie
 }
 
+// In a state where multiple steps have the score, we end up taking the 1st move everytime.
+// This makes the game predictable. Hence, randomily sorting all the same values will provide us
+// with a new move everytime.
+AIAction.shuffleResults = function(actionList) {
+    logger.log("Entering into AIAction.shuffleResults");
+
+    logger.log("BEFORE " + actionList)
+    // shuffles the array in place
+    for (var i = actionList.length - 1; i > 0; i--) {
+        var rand = Math.floor(Math.random() * (i + 1));
+        [actionList[i], actionList[rand]]=[actionList[rand], actionList[i]]
+    }
+
+    logger.log("AFTER " + actionList)
+}
 
 /*
  * Constructs an AI player with a specific level of intelligence
@@ -150,6 +165,8 @@ var AI = function() {
             logger.log("itr[" + itr + "] movePosition[" + available_moves[itr].movePosition 
                 + "] minimaxVal[" + available_moves[itr].minimaxVal + "]");
         }
+
+        AIAction.shuffleResults(available_moves);
 
         //sort the enumerated actions list by score
         if(game.TURN === game.SYMBOL.human)
