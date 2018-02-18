@@ -140,7 +140,7 @@ var AI = function() {
         // without this, medium is also getting a little difficult to win and all of them are going to tie
         if(Math.random()*100 <= probability) {
             // if we pass opponents move, then we get a blocking move.
-            var finish_moves =g ame.getFinishMoves(game.TURN === game.SYMBOL.human ? game.SYMBOL.robot : game.SYMBOL.human);
+            var finish_moves = game.getFinishMoves(game.TURN === game.SYMBOL.human ? game.SYMBOL.robot : game.SYMBOL.human);
 
             if(finish_moves !== undefined && finish_moves.length > 0) {
                 return finish_moves;
