@@ -51,7 +51,7 @@ function robotMove() {
 	// when you feel eerything is over, then update the screen
 	UI.updateScreen(GAME_STATE);
 
-	//hello Mr. Player, its your move now! clock is ticking
+	// hello Mr. Player, its your move now! clock is ticking
 }
 
 function playerMove() {
@@ -106,13 +106,13 @@ function activateBoard() {
 	for (var row = 1; row <= 3; row++) {
 		for (var col = 1; col <= 3; col++) {
 			logger.log("Adding listener for row[" + row + "] col[" + col + "]");	
-			document.getElementById("cell-"+row+col).addEventListener("click", playerMove, false);
+			document.getElementById("cell-" + row + col).addEventListener("click", playerMove, false);
 		}
 	}
 
 	document.getElementById("restartgame").addEventListener("click", startGame, false);
 
-	$("#navbarSupportedContent a").on("click", function(){
+	$("#navbarSupportedContent a").on("click", function() {
 		logger.log("Entering to access the difficulty level");
 
 		// make the current one not active
