@@ -34,10 +34,13 @@ function robotMove() {
 	// because cell_to_play contains array values of 0...to length-1 and 
 	// for cell-id we have the values from 1 to length
 	cell.id = "cell-" + (cell_to_play[0]+1) + (cell_to_play[1]+1);
+
 	// first draw the X/O as per the turn
 	UI.drawSVG(cell, GAME_STATE);
+
 	// then check if the game is over
 	checkGameOver();
+
 	// when you feel eerything is over, then update the screen
 	UI.updateScreen(GAME_STATE);
 
@@ -100,12 +103,7 @@ function initializeBoard() {
 function activateBoard() {
 	logger.log("Entered into activateBoard");
 
-	for (var row = 1; row <= 3; row++) {
-		for (var col = 1; col <= 3; col++) {
-			logger.log("Adding listener for row[" + row + "] col[" + col + "]");	
-			document.getElementById("cell-" + row + col).addEventListener("click", playerMove, false);
-		}
-	}
+	addCellListeners();
 
 	document.getElementById("restartgame").addEventListener("click", startGame, false);
 
@@ -123,6 +121,15 @@ function activateBoard() {
    		// you do not want to change level and still continue with current game, hence restart the game
    		startGame();
 	});
+}
+
+function addCellListeners() {
+	for (var row = 1; row <= 3; row++) {
+		for (var col = 1; col <= 3; col++) {
+			logger.log("Adding listener for row[" + row + "] col[" + col + "]");
+			document.getElementById("cell-" + row + col).addEventListener("click", playerMove, false);
+		}
+	}
 }
 
 function startGame() {
