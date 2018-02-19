@@ -37,17 +37,7 @@ function robotMove() {
 	// first draw the X/O as per the turn
 	UI.drawSVG(cell, GAME_STATE);
 	// then check if the game is over
-	if(!GAME_STATE.isGameOver()) {
-		// if not, then retransition to the next step/view
-		GAME_STATE.transitionTurn();
-	}
-	else {
-		if(GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerXWon) {
-			score_human++;
-		} else if(GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerOWon) {
-			score_robot++;
-		}
-	}
+	checkGameOver();
 	// when you feel eerything is over, then update the screen
 	UI.updateScreen(GAME_STATE);
 
@@ -66,18 +56,9 @@ function playerMove() {
 
 	// first draw the X/O as per the turn
 	UI.drawSVG(this, GAME_STATE);
+
 	// then check if the game is over
-	if(!GAME_STATE.isGameOver()) {
-		// if not, then retransition to the next step/view
-		GAME_STATE.transitionTurn();
-	}
-	else {
-		if(GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerXWon) {
-			score_human++;
-		} else if(GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerOWon) {
-			score_robot++;
-		}
-	}
+	checkGameOver();
 	
 	// when you feel eerything is over, then update the screen
 	UI.updateScreen(GAME_STATE);
@@ -88,7 +69,23 @@ function playerMove() {
 	}, 1000);
 }
 
+function checkGameOver() {
+	if (!GAME_STATE.isGameOver()) {
+		// if not, then retransition to the next step/view
+		GAME_STATE.transitionTurn();
+		return;
+	}
 
+	if (GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerXWon) {
+		score_human++;
+		return;
+	}
+
+	if (GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerOWon) {
+		score_robot++;
+		return;
+	}
+}
 
 function initializeBoard() {
 	logger.log("Entered into initializeBoard");
