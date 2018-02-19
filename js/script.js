@@ -28,7 +28,7 @@ function robotMove() {
 		return true;
 	}
 
-	GAME_STATE.markCell(cell_to_play[0], cell_to_play[1]); 
+	GAME_STATE.markCell(cell_to_play[0], cell_to_play[1]);
 
 	var cell = {};
 	// because cell_to_play contains array values of 0...to length-1 and 
@@ -55,7 +55,7 @@ function playerMove() {
 		return true;
 	}
 
-	GAME_STATE.markCell(this.getAttribute("data-row"), this.getAttribute("data-col")); 
+	GAME_STATE.markCell(this.getAttribute("data-row"), this.getAttribute("data-col"));
 
 	// first draw the X/O as per the turn
 	UI.drawSVG(this, GAME_STATE);

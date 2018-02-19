@@ -164,9 +164,9 @@ var AI = function() {
 
         isLogging = true;
 
-        logger.log("available_moves.length = " + available_moves.length); 
+        logger.log("available_moves.length = " + available_moves.length);
         for(var itr = 0; itr < available_moves.length; itr++) {
-            logger.log("itr[" + itr + "] movePosition[" + available_moves[itr].movePosition 
+            logger.log("itr[" + itr + "] movePosition[" + available_moves[itr].movePosition
                 + "] minimaxVal[" + available_moves[itr].minimaxVal + "]");
         }
 
@@ -202,7 +202,7 @@ var AI = function() {
             }
         }
 
-        return chosenMove;  
+        return chosenMove;
     }
     /*
      * private function: make the ai player take a blind move
@@ -219,7 +219,7 @@ var AI = function() {
 
         if(finish_moves !== undefined && finish_moves.length > 0) {
             return finish_moves;
-        } 
+        }
 
         var available_cells = game.emptyCells();
 
@@ -260,18 +260,18 @@ var AI = function() {
         logger.log("Entering into getBestRobotMove");
 
         game = parGameState.clone();
-        var cell_to_play; 
+        var cell_to_play;
 
         switch(game.DIFFICULTY_LEVEL) {
             // invoke the desired behavior based on the level chosen
-            case "Easy": 
-                cell_to_play = takeAEasyMove(); 
+            case "Easy":
+                cell_to_play = takeAEasyMove();
                 break;
-            case "Medium": 
-                cell_to_play = takeAMediumMove(); 
+            case "Medium":
+                cell_to_play = takeAMediumMove();
                 break;
-            case "Hard": 
-                cell_to_play = takeAHardMove(); 
+            case "Hard":
+                cell_to_play = takeAHardMove();
                 break;
             default:
                 logger.log("Entered into default case, something is not right");

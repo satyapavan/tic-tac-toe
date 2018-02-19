@@ -126,7 +126,7 @@ var cGameState = function (level) {
 		// make sure there is no <= there, elese the gameover is not coming after 5 moves. yuck!
 		if(this.TOTAL_MOVES < 5) {
 			logger.log("Too few moves, game cannot be over yet");
-			this.GAME_STATUS = this.RESULTS.incomplete ; 
+			this.GAME_STATUS = this.RESULTS.incomplete;
 			return false;
 		}
 
@@ -153,7 +153,7 @@ var cGameState = function (level) {
 					game_status = true;
 					this.SLASH_INFO = "strike_col_" + (itr+1);
 					break;
-				}	
+				}
 			}
 
 			// now check for diagonal success
@@ -188,9 +188,9 @@ var cGameState = function (level) {
 			this.WINNING_LINE = pos;
 
 			if(this.TURN === this.SYMBOL.human ) {
-				this.GAME_RESULT = this.RESULTS.playerXWon ;
+				this.GAME_RESULT = this.RESULTS.playerXWon;
 			} else {
-				this.GAME_RESULT = this.RESULTS.playerOWon ;
+				this.GAME_RESULT = this.RESULTS.playerOWon;
 			}
 
 		} else if(this.TOTAL_MOVES >= 9) {
@@ -254,7 +254,7 @@ var cGameState = function (level) {
 						}
 					}
 					break;
-				}	
+				}
 			}
 
 			// we got a winning position, so lets get out

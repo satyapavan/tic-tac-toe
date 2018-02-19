@@ -47,7 +47,6 @@ UI.drawBoard = function() {
 
 	document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
 	document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
-
 }
 
 UI.drawSVG = function(cell, parGameState) {
