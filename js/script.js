@@ -123,7 +123,7 @@ function activateBoard() {
 	});
 }
 
-function addCellListeners() {
+function activateCells() {
 	for (var row = 1; row <= 3; row++) {
 		for (var col = 1; col <= 3; col++) {
 			logger.log("Adding listener for row[" + row + "] col[" + col + "]");
