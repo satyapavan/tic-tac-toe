@@ -1,19 +1,26 @@
 // most of this code is straight out of https://github.com/Mostafa-Samir/Tic-Tac-Toe-AI/blob/master/scripts/ai.js
 // he wrote the code so well that i ended up using the same names too
 
-var AIAction = function(pos) {
-    // public : the position on the board that the action would put the letter on
+var AIAction = function (pos) {
+    /** 
+     * The position on the board that the action would put the letter on.
+     * @public
+     */
     this.movePosition = pos; // this is going to contain the array as {row, col}
 
-    // public : the minimax value of the state that the action leads to when applied
+    /**
+     * The minimax value of the state that the action leads to when applied.
+     * @public
+     */
     this.minimaxVal = 0;
 };
 
-/*
- * public static function that defines a rule for sorting AIActions in ascending manner
- * @param firstAction [AIAction] : the first action in a pairwise sort
- * @param secondAction [AIAction]: the second action in a pairwise sort
- * @return [Number]: -1, 1, or 0
+/**
+ * Defines a rule for sorting AIActions in ascending manner.
+ * @public @static
+ * @param {AIAction} firstAction: The first action in a pairwise sort.
+ * @param {AIAction} secondAction: The second action in a pairwise sort.
+ * @return {Number}: -1, 1, or 0
  */
 AIAction.ASCENDING = function(firstAction, secondAction) {
     logger.log("Entering into AIAction.ASCENDING");
@@ -25,11 +32,12 @@ AIAction.ASCENDING = function(firstAction, secondAction) {
         return 0; // indicates a tie
 }
 
-/*
- * public static function that defines a rule for sorting AIActions in descending manner
- * @param firstAction [AIAction] : the first action in a pairwise sort
- * @param secondAction [AIAction]: the second action in a pairwise sort
- * @return [Number]: -1, 1, or 0
+/**
+ * Defines a rule for sorting AIActions in descending manner.
+ * @public @static
+ * @param {AIAction} firstAction The first action in a pairwise sort.
+ * @param {AIAction} secondAction The second action in a pairwise sort.
+ * @return {Number} -1, 1, or 0
  */
 AIAction.DESCENDING = function(firstAction, secondAction) {
     logger.log("Entering into AIAction.DESCENDING");
@@ -57,19 +65,19 @@ AIAction.shuffleResults = function(actionList) {
     logger.log("AFTER " + actionList);
 }
 
-/*
- * Constructs an AI player with a specific level of intelligence
- * @param level [String]: the desired level of intelligence
+/**
+ * Constructs an AI player with a specific level of intelligence.
  */
 var AI = function() {
     // this tells the number of times the minimaxVal function is called
     var cnt = 0;
     var game; // this is the game state to handle, in other words this is the parGameState variable
 
-    /*
-     * private recursive function that computes the minimax value of a game state
-     * @param state [State] : the state to calculate its minimax value
-     * @returns [Number]: the minimax value of the state
+    /**
+     * Recursively computes the minimax value of a game state.
+     * @private
+     * @param {State} parGameState The state to calculate its minimax value.
+     * @returns {Number} The minimax value of the state.
      */
     function minimaxValue(parGameState) {
         logger.log("Entering into minimaxValue = " + cnt++);
@@ -92,7 +100,7 @@ var AI = function() {
             var available_cells = parGameState.emptyCells();
             logger.log("available_cells.length = " + available_cells.length);
 
-            //enumerate next available_cells states using the info form available_cells positions
+            // enumerate next available_cells states using the info form available_cells positions
             var available_NextStates = available_cells.map(function(pos) {
 
                 var nextState = parGameState.clone();
@@ -164,9 +172,9 @@ var AI = function() {
 
         isLogging = true;
 
-        logger.log("available_moves.length = " + available_moves.length); 
+        logger.log("available_moves.length = " + available_moves.length);
         for(var itr = 0; itr < available_moves.length; itr++) {
-            logger.log("itr[" + itr + "] movePosition[" + available_moves[itr].movePosition 
+            logger.log("itr[" + itr + "] movePosition[" + available_moves[itr].movePosition
                 + "] minimaxVal[" + available_moves[itr].minimaxVal + "]");
         }
 
@@ -202,24 +210,23 @@ var AI = function() {
             }
         }
 
-        return chosenMove;  
+        return chosenMove;
     }
-    /*
-     * private function: make the ai player take a blind move
-     * that is: choose the cell to place its symbol randomly
-     * @param turn [String]: the player to play, either X or O
-     */
 
+    /**
+     * Make the ai player take a blind move,
+     * that is, choose the cell to place its symbol randomly
+     * @private 
+     */
     function takeAEasyMove() {
         logger.log("Entering into takeAEasyMove");
 
         // if we pass out symbol, we get a winning move
-
         var finish_moves = game.getFinishMoves(game.TURN);
 
         if(finish_moves !== undefined && finish_moves.length > 0) {
             return finish_moves;
-        } 
+        }
 
         var available_cells = game.emptyCells();
 
@@ -232,46 +239,46 @@ var AI = function() {
     }
 
 
-    /*
-     * private function: make the ai player take a novice move,
-     * that is: mix between choosing the optimal and suboptimal minimax decisions
-     * @param turn [String]: the player to play, either X or O
+    /**
+     * Make the ai player take a novice move,
+     * that is, mix between choosing the optimal and suboptimal minimax decisions.
+     * @private
      */
     function takeAMediumMove() {
         logger.log("Entering into takeAMediumMove");
         return getMoveWrapper(60); // play a good step all the time with 60% probability
     };
 
-    /*
-     * private function: make the ai player take a master move,
-     * that is: choose the optimal minimax decision
-     * @param turn [String]: the player to play, either X or O
+    /**
+     * Make the ai player take a master move,
+     * that is, choose the optimal minimax decision.
+     * @private
      */
     function takeAHardMove() {
         logger.log("Entering into takeAHardMove");
         return getMoveWrapper(100); // play a good step all the time with 100% probability
     }
 
-    /*
-     * public function: notify the ai player that it's its turn
-     * @param turn [String]: the player to play, either X or O
+    /**
+     * Notify the ai player that it's its turn.
+     * @public
      */
     this.getBestRobotMove = function(parGameState) {
         logger.log("Entering into getBestRobotMove");
 
         game = parGameState.clone();
-        var cell_to_play; 
+        var cell_to_play;
 
         switch(game.DIFFICULTY_LEVEL) {
             // invoke the desired behavior based on the level chosen
-            case "Easy": 
-                cell_to_play = takeAEasyMove(); 
+            case "Easy":
+                cell_to_play = takeAEasyMove();
                 break;
-            case "Medium": 
-                cell_to_play = takeAMediumMove(); 
+            case "Medium":
+                cell_to_play = takeAMediumMove();
                 break;
-            case "Hard": 
-                cell_to_play = takeAHardMove(); 
+            case "Hard":
+                cell_to_play = takeAHardMove();
                 break;
             default:
                 logger.log("Entered into default case, something is not right");
