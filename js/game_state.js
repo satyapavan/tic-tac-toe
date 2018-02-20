@@ -298,9 +298,9 @@ var cGameState = function (level) {
  * @param {string[][]} to  - Board to copy cells to.
  */
 function cloneCells(from, to) {
-	for (var row = 0; row < 3; row++) {
-		for (var col = 0; col < 3; col++) {
-			cloneTo[row][col] = cloneFrom[row][col];
+	for (var row = 0; row < from.length; row++) {
+		for (var col = 0; col < from[row].length; col++) {
+			to[row][col] = from[row][col];
 		}
 	}
 }
