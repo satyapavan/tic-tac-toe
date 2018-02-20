@@ -37,7 +37,7 @@ function robotMove() {
 	// first draw the X/O as per the turn
 	UI.drawSVG(cell, GAME_STATE);
 	// then check if the game is over
-	checkGameOver();
+	doPostTurnActivities();
 	// when you feel eerything is over, then update the screen
 	UI.updateScreen(GAME_STATE);
 
@@ -57,9 +57,9 @@ function playerMove() {
 	// first draw the X/O as per the turn
 	UI.drawSVG(this, GAME_STATE);
 
-	// then check if the game is over
-	checkGameOver();
-	
+	// then check if the game is over and if really is over, update scores or else change the player turn
+	doPostTurnActivities();
+
 	// when you feel eerything is over, then update the screen
 	UI.updateScreen(GAME_STATE);
 
@@ -69,23 +69,47 @@ function playerMove() {
 	}, 1000);
 }
 
-function checkGameOver() {
-	if (!GAME_STATE.isGameOver()) {
+
+function doPostTurnActivities() {
+	logger.log("Entering into doPostTurnActivities");
+
+	if (GAME_STATE.isGameOver()) {
+		// yay!! game over, lets update the scores.
+		updateScores();
+	}
+	else {
 		// if not, then retransition to the next step/view
 		GAME_STATE.transitionTurn();
-		return;
-	}
-
-	if (GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerXWon) {
-		score_human++;
-		return;
-	}
-
-	if (GAME_STATE.GAME_RESULT === GAME_STATE.RESULTS.playerOWon) {
-		score_robot++;
-		return;
 	}
 }
+
+// every win fetches you 10 points and a tie gets 5 each.
+// renamed the function name to reflect the new purpose of the function call.
+function updateScores() {
+	logger.log("Entering into updateScores");
+
+	// not a fan of delimeters in 'case' statements, so leaving it simple
+	switch (GAME_STATE.GAME_RESULT) {
+		case GAME_STATE.RESULTS.playerXWon:
+			score_human+=10;
+			break;
+
+		case GAME_STATE.RESULTS.playerOWon:
+			score_robot+=10;
+			break;
+
+		case GAME_STATE.RESULTS.tie:
+			score_robot+=5;
+			score_human+=5;
+			break;
+
+		default:
+			logger.log("Invalid Game result: " + GAME_STATE.GAME_RESULT);
+	}
+
+	logger.log("Human:" + score_human + "  -- Robot:" + score_robot);
+}
+
 
 function initializeBoard() {
 	logger.log("Entered into initializeBoard");

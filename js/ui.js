@@ -173,6 +173,9 @@ UI.updateScreen = function(parGameState) {
 
 			UI.animateGameOverCells(parGameState);
 
+			document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
+			document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
+
 			setTimeout(function() {
 				var div = document.getElementById("tie");
 				div.style.display = "block"; 
