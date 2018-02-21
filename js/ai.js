@@ -55,14 +55,11 @@ AIAction.DESCENDING = function(firstAction, secondAction) {
 AIAction.shuffleResults = function(actionList) {
     logger.log("Entering into AIAction.shuffleResults");
 
-    logger.log("BEFORE " + actionList);
     // shuffles the array in place
     for (var i = actionList.length - 1; i > 0; i--) {
         var rand = Math.floor(Math.random() * (i + 1));
         [actionList[i], actionList[rand]] = [actionList[rand], actionList[i]];
     }
-
-    logger.log("AFTER " + actionList);
 }
 
 /**
@@ -158,7 +155,7 @@ var AI = function() {
         var available_cells = game.emptyCells();
 
         logger.disableLogging();
-        
+
         // enumerate and calculate the score for each available_cells actions to the ai player
         var available_moves = available_cells.map(function(pos) {
             var action =  new AIAction(pos); // create the action object
