@@ -157,7 +157,8 @@ var AI = function() {
 
         var available_cells = game.emptyCells();
 
-        isLogging = false;
+        logger.disableLogging();
+        
         // enumerate and calculate the score for each available_cells actions to the ai player
         var available_moves = available_cells.map(function(pos) {
             var action =  new AIAction(pos); // create the action object
@@ -170,7 +171,7 @@ var AI = function() {
             return action;
         });
 
-        isLogging = true;
+        logger.enableLogging();
 
         logger.log("available_moves.length = " + available_moves.length);
         for(var itr = 0; itr < available_moves.length; itr++) {
