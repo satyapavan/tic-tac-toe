@@ -127,6 +127,12 @@ var cGameState = function (level) {
 		var pos;
 		var game_status = false;
 
+		// As we are calling this function multiple times, its better to optimize the calls 
+		if( this.GAME_RESULT !== this.RESULTS.incomplete ) {
+			logger.log("Well, a result is already reached, lets save cpu cycles and do nothing");
+			return true;
+		}
+
 		// make sure there is no <= there, elese the gameover is not coming after 5 moves. yuck!
 		if(this.TOTAL_MOVES < 5) {
 			logger.log("Too few moves, game cannot be over yet");
