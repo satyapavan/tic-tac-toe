@@ -1,12 +1,15 @@
-# tic-tac-toe-js
-Javascript implementation of tic tac toe game
+### About
+Javascript implementation of tic tac toe game with varying levels of difficulties and artificial intellegence.
 
-### Robot(O) wins the game
-![Robot(O) wins the game](images/O-wins.gif)
-### Human(X) wins the game
-![Human(X) wins the game](images/X-wins.gif)
-### It's a TIE
-![It's a TIE](images/XO-tie.gif)
+### Live demo
+https://satyapavan.github.io/tic-tac-toe-js/
+
+### Screenshots 
+<div>
+  <img src="images/X-wins.gif" alt="X winning" width=270>
+  <img src="images/O-wins.gif" alt="O Winning" width=270>
+  <img src="images/XO-tie.gif" alt="Tied game" width=270>
+</div>
 
 **Good References**
 - https://github.com/carpben/TicTacToe (The one that wrote an article about the best position and no loss algo)
