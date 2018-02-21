@@ -10,9 +10,8 @@ function computerMove() {
 }
 
 function robotMove() {
-	logger.log("Entering into robotMove", GAME_STATE);
+	logger.log("Entering into robotMove");
 
-	logger.log(GAME_STATE.isGameOver());
 	logger.log(GAME_STATE.turn !== GAME_STATE.SYMBOL.robot);
 
 	if( GAME_STATE.isGameOver() || GAME_STATE.TURN !== GAME_STATE.SYMBOL.robot) {
@@ -46,6 +45,11 @@ function robotMove() {
 
 function playerMove() {
 	logger.log("Entering into playerMove");
+
+	if( GAME_STATE.isGameOver() || GAME_STATE.TURN !== GAME_STATE.SYMBOL.human) {
+		logger.log("It seems the game is over, or its not your turn");
+		return false;
+	}
 
 	if( GAME_STATE.isCellMarked(this.getAttribute("data-row"), this.getAttribute("data-col"))) {
 		logger.log("As the cell is already marked, do not do anything");
