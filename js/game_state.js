@@ -42,11 +42,7 @@ var cGameState = function (level) {
 		cloneGameState.GAME_RESULT = this.GAME_RESULT;
 		cloneGameState.TURN = this.TURN;
 
-		for (var row = 0; row < 3; row++) {
-			for (var col = 0; col < 3; col++) {
-				cloneGameState.BOARD[row][col] = this.BOARD[row][col];
-			}
-		}
+		cloneCells(cloneGameState.BOARD, this.BOARD);
 
 		logger.log("Original object ", this);
 		logger.log("Clone    object ", cloneGameState);
@@ -130,7 +126,7 @@ var cGameState = function (level) {
 		// make sure there is no <= there, elese the gameover is not coming after 5 moves. yuck!
 		if(this.TOTAL_MOVES < 5) {
 			logger.log("Too few moves, game cannot be over yet");
-			this.GAME_STATUS = this.RESULTS.incomplete ; 
+			this.GAME_STATUS = this.RESULTS.incomplete;
 			return false;
 		}
 
@@ -157,7 +153,7 @@ var cGameState = function (level) {
 					game_status = true;
 					this.SLASH_INFO = "strike_col_" + (itr+1);
 					break;
-				}	
+				}
 			}
 
 			// now check for diagonal success
@@ -192,9 +188,9 @@ var cGameState = function (level) {
 			this.WINNING_LINE = pos;
 
 			if(this.TURN === this.SYMBOL.human ) {
-				this.GAME_RESULT = this.RESULTS.playerXWon ;
+				this.GAME_RESULT = this.RESULTS.playerXWon;
 			} else {
-				this.GAME_RESULT = this.RESULTS.playerOWon ;
+				this.GAME_RESULT = this.RESULTS.playerOWon;
 			}
 
 		} else if(this.TOTAL_MOVES >= 9) {
@@ -258,7 +254,7 @@ var cGameState = function (level) {
 						}
 					}
 					break;
-				}	
+				}
 			}
 
 			// we got a winning position, so lets get out
@@ -272,31 +268,17 @@ var cGameState = function (level) {
 			line = line.join('');
 
 			if(line === player.repeat(2)) {
-
-				if(this.BOARD[0][0] === "" )
-					finish_moves.push([0, 0]);
-				else if(this.BOARD[1][1] === "" )
-					finish_moves.push([1, 1]);
-				else if(this.BOARD[2][2] === "" )
-					finish_moves.push([2, 2]);
-
+				checkDiagonalA(this.BOARD, finish_moves);
 				break;
 			}
 
-			// now the other diagoal check
+			// now the other diagonal check
 
 			line = [this.BOARD[0][2], this.BOARD[1][1], this.BOARD[2][0]];
 			line = line.join('');
 
 			if(line === player.repeat(2)) {
-
-				if(this.BOARD[0][2] === "" )
-					finish_moves.push([0, 2]);
-				else if(this.BOARD[1][1] === "" )
-					finish_moves.push([1, 1]);
-				else if(this.BOARD[2][0] === "" )
-					finish_moves.push([2, 0]);
-
+				checkDiagonalB(this.BOARD, finish_moves);
 				break;
 			}
 
@@ -309,3 +291,42 @@ var cGameState = function (level) {
 			return finish_moves[0];
 	}
 };
+
+/**
+ * Copies all the cells from one board to another.
+ * @param {string[][]} from - Board to copy cells from.
+ * @param {string[][]} to  - Board to copy cells to.
+ */
+function cloneCells(from, to) {
+	for (var row = 0; row < from.length; row++) {
+		for (var col = 0; col < from[row].length; col++) {
+			to[row][col] = from[row][col];
+		}
+	}
+}
+
+/**
+ * @param {string[][]} board
+ * @param {[number, number][]} finish_moves
+ */
+function checkDiagonalA(board, finish_moves) {
+	if (board[0][0] === "")
+		finish_moves.push([0, 0]);
+	else if (board[1][1] === "")
+		finish_moves.push([1, 1]);
+	else if (board[2][2] === "")
+		finish_moves.push([2, 2]);
+}
+
+/**
+ * @param {string[][]} board
+ * @param {[number, number][]} finish_moves
+ */
+function checkDiagonalB(board, finish_moves) {
+	if (board[0][2] === "")
+		finish_moves.push([0, 2]);
+	else if (board[1][1] === "")
+		finish_moves.push([1, 1]);
+	else if (board[2][0] === "")
+		finish_moves.push([2, 0]);
+}
