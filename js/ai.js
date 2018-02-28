@@ -189,7 +189,7 @@ var AI = function() {
         }
 
         /*
-         * take the optimal action 40% of the time, and take the 1st suboptimal action 60% of the time
+         * take the optimal action 40% of the time, and take the 1st suboptimal action 50% of the time
          */
         var chosenMove;
         if(Math.random() * 100 <= probability) {
@@ -244,7 +244,7 @@ var AI = function() {
      */
     function takeAMediumMove() {
         logger.log("Entering into takeAMediumMove");
-        return getMoveWrapper(60); // play a good step all the time with 60% probability
+        return getMoveWrapper(50); // play a good step all the time with 50% probability
     };
 
     /**
@@ -266,7 +266,6 @@ var AI = function() {
 
         game = parGameState.clone();
         var cell_to_play;
-
         switch(game.DIFFICULTY_LEVEL) {
             // invoke the desired behavior based on the level chosen
             case "Easy":
