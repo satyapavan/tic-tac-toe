@@ -1,5 +1,20 @@
 ### About
 Javascript implementation of tic tac toe game with varying levels of difficulties and artificial intellegence.
+This is my first hands-on with javascript, so you may find many instances which could be handled better. If you see any such parts, feel free to let me know. I will be happy to learn.
+
+### Difficulty levels
+This game is having 3 levels of intelligence. They are listed as below,
+
+|               | Easy        | Medium | Hard |
+| ------------- |:-------------:|:--------:|:------:|
+| Play a WINning move | Always| Always | Always |
+| Play a BLOCKing move| Random play  |   50% of times | Always |
+| Other's | Random play | Best possible move 50% of times | Best possible move |
+
+### Scoring
+- Wining player fetches **10 points**
+- Losing player fetches **0 points** (no negative scoring either)
+- A TIE fetches each player **5 points** each
 
 ### Live demo
 https://satyapavan.github.io/tic-tac-toe-js/
