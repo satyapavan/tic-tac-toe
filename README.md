@@ -1,3 +1,8 @@
+# Tic Tac Toe  
+<a href="https://github.com/satyapavan/tic-tac-toe-js/commits/master">
+        <img src="https://img.shields.io/github/last-commit/badges/shields/gh-pages.svg?label=last%20deployed"
+            alt="last deployed"></a>
+
 ## Table of Contents
 1. [About](#about)
 2. [Difficulty levels](#difficulty-levels)
