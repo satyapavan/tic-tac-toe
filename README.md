@@ -1,3 +1,12 @@
+## Table of Contents
+1. [About](#about)
+2. [Difficulty levels](#difficulty-levels)
+3. [Scoring](#scoring)
+4. [Live demo](#live-demo)
+5. [Screenshots](#screenshots)
+6. [References](#references)
+
+
 ### About
 Javascript implementation of tic tac toe game with varying levels of difficulties and artificial intellegence.
 This is my first hands-on with javascript, so you may find many instances which could be handled better. If you see any such parts, feel free to let me know. I will be happy to learn.
@@ -26,7 +35,7 @@ https://satyapavan.github.io/tic-tac-toe-js/
   <img src="images/XO-tie.gif" alt="Tied game" width=270>
 </div>
 
-**Good References**
+**References**
 - https://github.com/carpben/TicTacToe (The one that wrote an article about the best position and no loss algo)
 - https://github.com/ttsu/tictactoe-java (Java implementation with AI)
 - https://github.com/Mostafa-Samir/Tic-Tac-Toe-AI (JS implementation with multiple level's of AI)
