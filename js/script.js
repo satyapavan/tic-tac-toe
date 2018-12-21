@@ -3,6 +3,13 @@ var GAME_STATE;
 var score_human = 0;
 var score_robot = 0;
 
+// This flag is to make sure we are only sledging once
+var alreadySledgedFlag = 0;
+
+// This is to note the winning/losing streak.
+// Increment for a win and decrement for a lose and reset for a tie
+var winLoseStreak = 0;
+
 function computerMove() {
 	logger.log("Entering into computerMove");
 	makeEaseMove();

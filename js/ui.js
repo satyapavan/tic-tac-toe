@@ -108,6 +108,33 @@ UI.animateGameOverCells = function(parGameState) {
 	}
 }
 
+UI.displaySledging = function() {
+	logger.log("Sledging Status :" +  alreadySledgedFlag.toString());
+	logger.log("Sledging Value  :" +  winLoseStreak.toString());
+
+	if( alreadySledgedFlag === 0 ) {
+			logger.log("Sledging Status :" +  alreadySledgedFlag.toString());
+
+		if(winLoseStreak.valueOf() === 2) {
+			setTimeout(function() {
+				$('#sledgingModal').modal('show');
+			}, 5000);
+
+			alreadySledgedFlag = 1;
+		}
+
+		if(winLoseStreak.valueOf() === -2) {
+			setTimeout(function() {
+				document.getElementById('sledgingModalId').innerHTML = "Too hard? You seem to be sweating heavily.<br> \
+				Try changing difficulty level(s) and try again.";
+				$('#sledgingModal').modal('show');
+			}, 5000);
+
+			alreadySledgedFlag = 1;
+		}
+	}
+}
+
 UI.updateScreen = function(parGameState) {
 	logger.log("Entering into paintScreen");
 
@@ -143,6 +170,13 @@ UI.updateScreen = function(parGameState) {
 				div.style.display = "block"; 
 				document.getElementById("x-won").addEventListener("click", startGame, false);
 			}, 4000);
+
+			if(winLoseStreak >= 0) 
+				winLoseStreak++;
+			else
+				winLoseStreak = 0;
+
+			UI.displaySledging();
 		}
 		break;
 
@@ -162,6 +196,14 @@ UI.updateScreen = function(parGameState) {
 				div.style.display = "block"; 
 				document.getElementById("o-won").addEventListener("click", startGame, false);
 			}, 4000);
+
+
+			if(winLoseStreak <= 0) 
+				winLoseStreak--;
+			else
+				winLoseStreak = 0;
+
+			UI.displaySledging();
 		}
 		break;
 
@@ -181,6 +223,9 @@ UI.updateScreen = function(parGameState) {
 				div.style.display = "block"; 
 				document.getElementById("tie").addEventListener("click", startGame, false);
 			}, 4000);
+
+
+			winLoseStreak = 0; 
 		}
 		break;
 
