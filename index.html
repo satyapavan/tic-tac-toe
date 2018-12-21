@@ -124,7 +124,23 @@
 				Restart Game
 			</div>		
 		</div>
-	
+
+		<!-- Modal that will be invoked the the player is on a losing/winning streak -->
+		<div class="modal fade" id="sledgingModal" tabindex="-1" role="dialog" 
+			aria-hidden="true">
+		 	<div class="modal-dialog modal-dialog-centered" role="document">
+		    	<div class="modal-content">
+		      		<div id="sledgingModalId" class="modal-body">
+					Too easy? You seem to be flying through.  <br>
+					Try changing difficulty level(s) and try again.
+		      		</div>
+		      		<div class="modal-footer">
+		        		<button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+		      		</div>
+		    	</div>
+		  	</div>
+		</div>
+		
 		<!-- Modal that will be invoked when we click on the how to play -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" 
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
