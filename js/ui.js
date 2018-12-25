@@ -125,8 +125,7 @@ UI.displaySledging = function() {
 
 		if(winLoseStreak.valueOf() === -2) {
 			setTimeout(function() {
-				document.getElementById('sledgingModalId').innerHTML = "Too hard? You seem to be sweating heavily.<br> \
-				Try changing difficulty level(s) and try again.";
+				document.getElementById('sledgingModalId').innerHTML = "Too hard? Try changing difficulty level(s)";
 				$('#sledgingModal').modal('show');
 			}, 5000);
 
