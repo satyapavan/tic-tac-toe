@@ -31,7 +31,7 @@ This game is having 3 levels of intelligence. They are listed as below,
 - A TIE fetches each player **5 points** each
 
 ### Live demo
-https://satyapavan.github.io/tic-tac-toe-js/
+https://satyapavan.github.io/tic-tac-toe/
 
 ### Screenshots 
 <div>
